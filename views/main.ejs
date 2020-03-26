@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <link rel='icon' href="../public/room8s_logo.ico" type='image/x-icon'/>
+    <link rel='icon' href="../public/room8s_logo.ico" type='image/x-icon' />
     <%- include("headers.ejs") %>
     <script> var loggedInUser = <%- JSON.stringify(user) %> </script>
 
@@ -68,7 +68,13 @@
             /* the minimum width */
         }
     </style>
-    <script id="mainPageScript" type="text/babel" src="../public/webpack/mainPage.js"></script>
+    
+    
+    <script>
+    console.log('INLINE SCRIPT THO');    
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.2.1/bloodhound.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.2.1/typeahead.jquery.min.js"></script>
     <script type="text/javascript" src="../public/webpack/autoComplete.js"></script>
     <link rel="stylesheet" type="text/css" href="../public/css/main.css">
 
@@ -93,8 +99,9 @@
 </head>
 
 <body>
-    <!--NAVIGATION BAR-->
-    <%- include("template-nav-bar.ejs") %>
+    <div id ="navbar"></div>
+    <script type="text/javascript" src="../public/webpack/router.js"></script>
+
 
     <% if (userHasGroup == false){ %>
     <script>
@@ -107,6 +114,32 @@
         }
     </script>
     <% } %>
+
+    <% if (userHasGroup == true ){ %>
+    <div id="content-container" class="container-fluid" style="display: none;">
+
+
+    </div>
+
+    <% } else { %>
+
+    <div class="container-fluid">
+        <!-- <div class="d-flex flex-row  mb-5 justify-content-left"> -->
+
+        <div class="row">
+            <div class="col">
+                <h4> Group wasn't found :-( </h4>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col">
+                <button type="button" class="btn btn-primary">Create Group</button> </div>
+        </div>
+        <!-- </div> -->
+    </div>
+    </div>
+    <% } %>
+    
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -134,30 +167,7 @@
 
 
 
-    <% if (userHasGroup == true ){ %>
-    <div id="content-container" class="container-fluid" style="display: none;">
 
-
-    </div>
-
-    <% } else { %>
-
-    <div class="container-fluid">
-        <!-- <div class="d-flex flex-row  mb-5 justify-content-left"> -->
-
-        <div class="row">
-            <div class="col">
-                <h4> Group wasn't found :-( </h4>
-            </div>
-        </div>
-        <div class="row mb-5">
-            <div class="col">
-                <button type="button" class="btn btn-primary">Create Group</button> </div>
-        </div>
-        <!-- </div> -->
-    </div>
-    </div>
-    <% } %>
     <div id='CreateFormContent'> </div>
     <audio id="newMessageSound" src="../public/eventually.mp3" preload='auto'></audio>
 </body>
