@@ -3,5 +3,5 @@ bugs.txt
 server.cert
 server.key
 .env
-node_modules
+node_modules/
 public/uploads/

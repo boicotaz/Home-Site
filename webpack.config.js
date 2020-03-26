@@ -16,7 +16,8 @@ module.exports = {
     mainPage: './js/mainPage.js',
     expensesPage: './js/expenses.js',
     autoComplete: './js/autocomplete.js',
-    notifcations: './js/notifications.js'
+    notifcations: './js/notifications.js',
+    app: "./js/app.js"
     // socketClient: './js/socketClient.js'
   },
   output: {
