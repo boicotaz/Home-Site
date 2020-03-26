@@ -16,7 +16,6 @@ export default class ExpensesForm extends React.Component {
         e.preventDefault();
 
         let formData = $('#expense-form').serializeArray();
-        console.log(formData);
         let creditor = {};
         let debtors = [];
         let info = {};
@@ -41,7 +40,6 @@ export default class ExpensesForm extends React.Component {
             newExpense.push({ creditor: creditor.id, debtor: elem.id, when: info.date, description: info.desc, credit: creditor.credit, debt: elem.debt, creditorName, debtorName: debtorNames[index] })
         });
 
-        console.log("THE NEW EXPENSE IS:", newExpense);
         expensesAjax.storeNewExpense(postFormData, newExpense, socket);
 
     }
@@ -125,7 +123,6 @@ export default class ExpensesForm extends React.Component {
             let usersInGroup = this.state.usersInGroup;
             let evenly = true;
             let credit = 0;
-            console.log(" let clear the form");
             this.setState({ debtors: debtors, credit: credit, evenly: evenly, usersInGroup: usersInGroup, creditor: undefined });
         });
 

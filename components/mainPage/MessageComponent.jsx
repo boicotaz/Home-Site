@@ -13,7 +13,6 @@ export default class Message extends React.Component {
 
     render() {
 
-        console.log('message forced to rerender');
         let message = this.state.message;
         let currentUser = this.state.currentUser;
         let usersDetails = this.state.usersInGroup;

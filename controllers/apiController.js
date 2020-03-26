@@ -7,7 +7,6 @@ let storage = multer.diskStorage({
         cb(null, 'public/uploads/')
     },
     filename: function (req, file, cb) {
-        console.log(file);
         cb(null, "profImg_user" + req.user.id + "_.png")
     }
 });
@@ -27,7 +26,6 @@ apiController.post('/get-users-in-group', function (req, res) {
             users.forEach(user=> {
                 groupUsersDetails.set(user.id, {firstName: user.firstName, lastName : user.lastName, profImgExists: user.profImgExists, userId: user.id });
             });
-            console.log(groupUsersDetails);
             let groupUsersDetailsString = JSON.stringify([...groupUsersDetails]);
             res.send(groupUsersDetailsString);  
         });
@@ -48,7 +46,6 @@ apiController.get('/get-group-details', function (req, res) {
 })
 
 apiController.post('/post-profile-img', upload.single('profileImg'), (req, res) => {
-    // console.log(req.file);
     userService.updateProfImg(req.user.id, true);
     res.json(req.user);
 })

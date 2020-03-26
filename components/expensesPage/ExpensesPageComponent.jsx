@@ -13,7 +13,6 @@ export default class ExpensesPage extends React.Component {
         this.state.expenses = this.props.expenses;
         this.state.totals = this.props.totals;
         this.state.usersInGroupDetails = this.props.usersInGroupDetails;
-        console.log('current expense is ___', this.state.expenses);
     }
     componentDidMount() {
         $("#content-container").fadeIn('slow');
@@ -26,7 +25,6 @@ export default class ExpensesPage extends React.Component {
     }
 
     toggleView = () => {
-        // console.log(this.state.view, this.state.totals);
         let view;
         if (this.state.view == "eachExpense") {
             view = "allExpenses";
@@ -85,19 +83,15 @@ class ExpensesTable extends React.Component {
     }
 
     constructor(props) {
-        console.log("i")
         super(props);
         this.state.expenses = this.props.expenses;
         this.state.totals = this.props.totals;
         this.state.view = this.props.view;
         this.state.userNamesInGroup = this.props.userNamesInGroup;
         this.state.usersInGroupDetails = this.props.usersInGroupDetails;
-        // console.log("is the constructor called each time tho?");
         document.addEventListener('new-expense', e => {
-            console.log("THE DATA ARE!!!", e.detail);
             expensesAjax.getExpenseTotalsDataAjax().then(totalDebtsForEachUser => {
                 let newExpense = expensesAjax.processData(e.detail, this.state.usersInGroupDetails);
-                console.log("the processsed new Expense is_______________________________", newExpense);
                 this.setState({ expenses: [...this.state.expenses, newExpense], totals: totalDebtsForEachUser });
             })
 
@@ -118,7 +112,6 @@ class ExpensesTable extends React.Component {
      * @param {*} expenses 
      */
     renderEachExpense(expenses) {
-        // console.log("current expenses are:", expenses);
         let data = expenses.map(expense => {
 
             let tranactionsData = expense.reduce((sum, entry) => {
@@ -172,7 +165,6 @@ class ExpensesTable extends React.Component {
      */
     renderTotals(totals) {
         let data = [];
-        // console.log("totals in render Totals is: ", totals);
         Object.keys(totals).forEach(key => {
             let debtsInfo = '';
             let color = "";
@@ -214,7 +206,6 @@ class ExpensesTable extends React.Component {
     }
 
     render() {
-        console.log("Expense page render called_____________________________________________");
         if (this.props.view == "eachExpense") {
             return this.renderEachExpense(this.state.expenses);
         }

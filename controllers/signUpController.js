@@ -1,6 +1,5 @@
 var signUpController = require('express').Router();
 var userService = require('../services/userService')();
-// console.log(typeof userService);
 signUpController.get('/', function (req, res, next) {
     res.render('sign-up-room8s.ejs');
 });

@@ -4,4 +4,3 @@ server.cert
 server.key
 .env
 node_modules
-public/uploads/

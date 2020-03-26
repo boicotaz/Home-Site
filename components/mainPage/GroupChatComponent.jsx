@@ -24,7 +24,6 @@ export default class GroupChat extends React.Component {
         });
 
         document.addEventListener('userChangedPhoto', e => {
-            console.log("caught event change photo");
             let userDetail = this.state.usersInGroup.get(e.detail.userId);
             if (userDetail != undefined) {
                 this.state.userImageChanged = e.detail.userId;
@@ -36,10 +35,8 @@ export default class GroupChat extends React.Component {
     submitMessageEnterKey = (e) => {
 
         if (e.keyCode === 13) {
-            console.log("enter key pressed_______--");
             if ($('#searchText').val() != "") {
-                let messageText = $('#searchText').val();
-                console.log($('#searchText').val());
+                let messageText = $('#searchText').val();;
                 $('#searchText').val("");
                 this.renderNewMessage(messageText);
             }
@@ -50,16 +47,13 @@ export default class GroupChat extends React.Component {
     submitMessageClickKey = (e) => {
 
         if ($('#searchText').val() != "") {
-            console.log("click pressed_______--");
             let messageText = $('#searchText').val();
-            console.log($('#searchText').val());
             $('#searchText').val("");
             this.renderNewMessage(messageText);
         }
     }
 
     storeNewMessage = (newMsg) => {
-        console.log("in store newMsg:", newMsg);
         newMsg.groupId = this.state.groupDetails.groupId;
         groupMessagesAjax.storeNewMessage(newMsg);
     }
@@ -102,7 +96,6 @@ export default class GroupChat extends React.Component {
 
     componentDidMount() {
         document.getElementById("searchText").addEventListener("keydown", this.submitMessageEnterKey, false);
-        console.log("I was mounted_________________", document.getElementById("groupChatBody"));
     }
 
     componentDidUpdate() {
@@ -119,7 +112,6 @@ export default class GroupChat extends React.Component {
     }
 
     render() {
-        console.log('group chat forced to rerender');
         let groupChat = <React.Fragment>
             <div className="container col-4" id="groupChat" style={{ height: '516px' }}>
                 <div className="row">

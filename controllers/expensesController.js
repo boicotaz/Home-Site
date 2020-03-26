@@ -13,11 +13,9 @@ expensesController.get('/', authValidation, function (req, res, next) {
 expensesController.post('/create-expense', authValidation, function (req, res, next) {
 
     let { creditor, debtors, info } = req.body;
-    console.log("in create expense _____________________________", creditor, debtors, info);
     groupService.findGroupByUserId(creditor.id).then(group => expenseService.createExpense({ groupId: group.getGroupId(), description: info.desc, createdAt: info.date, sum: creditor.credit }, function (expense, isCreated) {
         if (isCreated) {
-            // console.log(expense);
-            transactionService.createTransactions(expense.getExpenseId(), creditor.id, debtors).then(res => console.log('----------------------------------------------------transactions created are :', res));
+            transactionService.createTransactions(expense.getExpenseId(), creditor.id, debtors);
             res.json({ data: req.body, expenseId: expense.getExpenseId() });
         }
         else {
@@ -166,8 +164,6 @@ expensesController.get('/get-expense-totals-table', authValidation, function (re
                     totalExpenses[key].debtSum += totalExpenses[key].debts[innerKey];
                 });
             });
-
-            console.log(totalExpenses);
             res.json(totalExpenses);
         });
 

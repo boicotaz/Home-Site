@@ -21,8 +21,9 @@ export default class MainPage extends React.Component {
         this.state.groupDetails = this.props.groupDetails;
         this.state.currentUser = this.props.currentUser;
         this.state.groupMessages = this.props.groupMessages;
+        console.log("I AM IN MAIN PAGE COMPONENT LETS SEE THE PROPS", this.props);
     }
-    
+
     componentDidMount() {
         $("#content-container").fadeIn('slow');
         let groupChatBody = document.getElementById("groupChatBody");
@@ -30,7 +31,6 @@ export default class MainPage extends React.Component {
     }
 
     componentWillMount() {
-        // console.log("I AM UNMOUNTED!!!!");
         $("#content-container").css("display", "none");
     }
     render() {

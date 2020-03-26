@@ -7,7 +7,6 @@ export default class AddUserInGroupModal extends React.Component{
     constructor(props) {
         super(props);
         this.state = {};
-        // console.log(props);
         this.state.groupDetails = this.props.groupDetails;
         this.state.usersInGroup = this.props.usersInGroup;
     }
@@ -24,7 +23,6 @@ export default class AddUserInGroupModal extends React.Component{
             submitData[input.name] = input.value;
         });
         grouDetailsAjax.addUserInGroup(submitData,this.state.groupDetails,this.state.usersInGroup);
-        console.log(formData);
 
     }
     render() {
