@@ -41,11 +41,11 @@ let getUsersInGroupDetails = function getUsersInGroupDetails() {
             type: 'POST',
             success: function (usersInGroupData) {
                 window.dispatchEvent(evt);
- 
+
                 usersInGroupData = JSON.parse(usersInGroupData);
 
                 let groupUsersDetails = new Map();
-                for ( let userData of usersInGroupData ) {
+                for (let userData of usersInGroupData) {
                     groupUsersDetails.set(userData[0], userData[1]);
                 }
 
@@ -58,8 +58,8 @@ let getUsersInGroupDetails = function getUsersInGroupDetails() {
     })
 }
 
-let addUserInGroup = (newUserFullName,groupDetails,usersInGroup) => {
-    let postData = {newUserData: newUserFullName, groupDetails: groupDetails};
+let addUserInGroup = (newUserFullName, groupDetails, usersInGroup) => {
+    let postData = { newUserData: newUserFullName, groupDetails: groupDetails };
 
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -69,7 +69,13 @@ let addUserInGroup = (newUserFullName,groupDetails,usersInGroup) => {
             contentType: "application/json",
             success: function (newGroupUser) {
                 // window.dispatchEvent(evt);
-                console.log(newGroupUser);
+
+                console.log("#####_____ADDED USER _____####", newGroupUser);
+                grouDetailsAjax.getUsersInGroupDetails().then(updatedGroupUsersDetails => {
+                    console.log('addd user in group - users in group', updatedGroupUsersDetails);
+                    usersInGroup = Array.from(updatedGroupUsersDetails);
+                    socket.emit('refresh-users-in-group-details', usersInGroup);
+                });
                 // socket.emit("new-group-user-added", usersInGroup);
             },
             error: function (error) {

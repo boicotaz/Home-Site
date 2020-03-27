@@ -3,51 +3,20 @@
 
 <!-- <script src="../public/js/template-nav-bar.js"></script> -->
 <!-- <script type="text/babel" src="../public/webpack/expensesPage.js"></script> -->
-<link rel="stylesheet" type="text/css" href="../public/css/template-nav-bar.css">
-<script type="text/babel" src="../public/webpack/notifcations.js"></script>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="../public/css/template-nav-bar.css"
+/>
+<script type="text/babel" src="../public/webpack/notifications.js"></script> 
 
-<nav class="navbar navbar-expand-md navbar-dark  bg-dark fixed-top" style="height: 60px;">
-    <a id="home-page" class="navbar-brand" onclick=mainPageExport.getMainPage(loggedInUser) href="#"><img
-            src="../public/room8s_logo.png" alt="logo" style="width:60px;"></a>
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" href="#" onclick=expensesPageExport.getExpensesPage(loggedInUser)>Expenses</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Chores</a>
-        </li>
-        <li id="notifications" class="nav-item dropdown mr-3">
 
-        </li>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <form id='search-form' class="form-inline active-pink-3 active-pink-4">
-                <i class="fa fa-search" aria-hidden="true"></i>
-                <input id='search-bar' class="form-control form-control-sm ml-2 w-75 mt-1 typeahead" type="text"
-                    placeholder="Search Users" aria-label="Search">
-            </form>
-        </li>
-        <li class="nav-item dropdown mr-3">
-            <a class="nav-link dropdown-toggle dr" href="#" id="navbarDropdownMenuLink" role="button"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user"></i>
-                My Profile
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" style="background-color:#008b8b"
-                aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="/sign-out">Log Out</a>
-                <a class="dropdown-item" href="#">Change Passwiord</a>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UploadImageModal"> Upload
-                    Profile
-                    Image
-                </a>
-            </div>
-        </li>
-    </ul>
-</nav>
+<div id="app"> </div>
+<script type="text/babel" src="../public/webpack/app.js"></script> 
+
 <br>
 <br>
-<br>
+<br>    
 
 
 <div class="modal fade" id="UploadImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -99,18 +68,14 @@
             $("#uploadProfileImgUploadBtn").removeClass('disabled');
         }
     });
-
     $("#profileImgForm").submit(function (event) {
         event.preventDefault();
-
         if ($('#profImgUploadField').val() == '') {
             console.log('no file yo!');
             return false;
         }
-
         let form = $('#profileImgForm')[0];
         let profileImgData = new FormData(form);
-
         $.ajax({
             url: '/api/post-profile-img',
             method: 'POST',
@@ -130,9 +95,5 @@
             error: function (error) {
             }
         })
-
-
     });
-
-
 </script>

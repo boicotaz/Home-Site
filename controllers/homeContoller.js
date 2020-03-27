@@ -29,12 +29,12 @@ homeController.get("/", passportService.authValidation, async (req, res, next) =
 
 homeController.post("/add-user-in-group", function (req, res, next) {
     let userToAddInGroupData = req.body
-    userService.getUserIdbyName(userToAddInGroupData.newUserData.fullName).then((userToAddId) => {
-      groupService.addUserToGroup(userToAddId, userToAddInGroupData.groupDetails).then( groupUsers => res.json(groupUsers));
+    userService.getUserByName(userToAddInGroupData.newUserData.fullName).then((userToAdd) => {
+        groupService.addUserToGroup(userToAdd.getUserId(), userToAddInGroupData.groupDetails).then(res.json(userToAdd));
     });
-  
-  
-  })
+
+
+})
 
 
 homeController.get("/get-group-messages", passportService.authValidation, async (req, res) => {

@@ -1,4 +1,5 @@
 import { expensesAjax } from "../../ajax/expensesAjax"
+import ExpensesForm from "./ExpensesFormComponent.jsx"
 
 export default class ExpensesPage extends React.Component {
 
@@ -46,29 +47,30 @@ export default class ExpensesPage extends React.Component {
         else if (this.state.view == "allExpenses") {
             buttonText = "View All Expenses";
         }
-
-        let expensePage = <div id='expenses-content' className="container" style={{ marginTop: '250px' }} >
-            <div className="row" id="buttons-row">
-                <div className='col-12'>
-                    <div className="btn-group btn-group-md" role="group" aria-label="Basic example">
-                        <button type="button" className="btn btn-secondary" data-toggle="modal"
-                            data-target="#darkModalForm">Create Expense</button>
-                        <button type="button" onClick={this.toggleView} className="btn btn-secondary">{buttonText}</button>
+        let expensesForm = <ExpensesForm usersInGroup={this.state.usersInGroupDetails} />;
+        let expensePage =
+            <div id='expenses-content' className="container" style={{ marginTop: '250px' }} >
+                <div className="row" id="buttons-row">
+                    <div className='col-12'>
+                        <div className="btn-group btn-group-md" role="group" aria-label="Basic example">
+                            <button type="button" className="btn btn-secondary" data-toggle="modal"
+                                data-target="#darkModalForm">Create Expense</button>
+                            <button type="button" onClick={this.toggleView} className="btn btn-secondary">{buttonText}</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            {/* style={{ color: 'black' }} */}
-            <div id="expense-table-id" className="row scrollbar scrollbar-primary" style={{ height: '600px', overflowY: 'scroll' }}> 
-                <div className='col-12 pr-0'>
-                    <table id='expenses-table' className="table table-hover table-dark" >
-                        <ExpensesTable expenses={this.state.expenses} totals={this.state.totals} userNamesInGroup={this.state.userNamesInGroup} usersInGroupDetails={this.state.usersInGroupDetails} view={this.state.view}></ExpensesTable>
-                    </table>
+                {/* style={{ color: 'black' }} */}
+                <div id="expense-table-id" className="row scrollbar scrollbar-primary" style={{ height: '600px', overflowY: 'scroll' }}>
+                    <div className='col-12 pr-0'>
+                        <table id='expenses-table' className="table table-hover table-dark" >
+                            <ExpensesTable expenses={this.state.expenses} totals={this.state.totals} userNamesInGroup={this.state.userNamesInGroup} usersInGroupDetails={this.state.usersInGroupDetails} view={this.state.view}></ExpensesTable>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <div id="modals-container"></div>
-        </div>
+                <div id="modals-container"></div>
+            </div>;
 
-        return (<React.Fragment>  {expensePage} </React.Fragment>)
+        return (<React.Fragment>  {expensePage} {expensesForm} </React.Fragment>)
     }
 
 

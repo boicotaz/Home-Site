@@ -61,7 +61,38 @@ function socketInit(server) {
 
       for (const [client, userInLoggedInList] of sequenceNumberByClient) {
         if (newMsgDetails.groupUsersIds.includes(userInLoggedInList.id)) {
-          client.emit('newGroupMessageReceived', newMsgDetails.message);
+          client.emit('newGroupMessageReceived', { message: newMsgDetails.message, currentUserId: newMsgDetails.currentUserId });
+        }
+      }
+
+    });
+
+    /**
+     * @typedef userDetails 
+     * @type {Array}
+     * @property {number}  - userDetails[0] = userId
+     * @property {object} userInfo - userDetails[1]
+     * @property {String} userInfo.firstName 
+     * @property {String} userInfo.lastName
+     * @property {Boolean} userInfo.profImgExists 
+     * @property {number} userInfo.userId
+     */
+
+
+    /**
+     * @param {Array<userDetails>} usersInGroup - the details we need to update usersInGroup 
+     */
+    socket.on('refresh-users-in-group-details', function (usersInGroup) {
+      console.log("caught refresh event with even data", usersInGroup);
+
+      usersInGroupIds = usersInGroup.map(userInGroup => {
+        return userInGroup[0];
+      });
+
+      for (const [client, userInLoggedInList] of sequenceNumberByClient) {
+        // client.emit('user_changed_photo', userDetails);
+        if (usersInGroupIds.includes(userInLoggedInList.id)) {
+          client.emit('refresh-users-in-group-details', usersInGroup);
         }
       }
 

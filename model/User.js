@@ -18,7 +18,7 @@ var userModelDefinition = {
     password: {
         type: Sequelize.STRING,
         allowNull: true,
-        defaultValue: null 
+        defaultValue: null
     },
     email: {
         type: Sequelize.STRING,
@@ -102,8 +102,8 @@ UserModel.getUserIdbyEmail = async function (email) {
     return this.findOne({ where: { email: email } }).then((user) => { console.log(user.getUserId()); return user.getUserId() })
 
 }
-UserModel.getUserIdbyName = async function (name) {
-    return this.findOne({ where: { firstName: name[0], lastName: name[1] }, attributes: { exclude: ['password'] } }).then((user) => { console.log(user.getUserId()); return user.getUserId() })
+UserModel.getUserByName = async function (name) {
+    return this.findOne({ where: { firstName: name[0], lastName: name[1] }, attributes: { exclude: ['password'] } });
 }
 
 UserModel.getUserById = function (userId) {
@@ -124,7 +124,7 @@ UserModel.updateProfImg = function (userId, profileImgFlag) {
 UserModel.getUserByGoogleId = function (googleId) {
     return this.findOne({ where: { googleId: googleId }, attributes: { exclude: ['password'] } });
 }
-UserModel.getUserbyEmail = function (email){
+UserModel.getUserbyEmail = function (email) {
     return this.findOne({ where: { email: email }, attributes: { exclude: ['password'] } });
 }
 
@@ -132,7 +132,7 @@ UserModel.updateGoogleId = function (googleId, userId) {
     return this.update({ googleId: googleId }, { where: { id: userId } });
 }
 
-UserModel.createUserWithGoogleAuth = function (options){
+UserModel.createUserWithGoogleAuth = function (options) {
     return this.create(options);
 }
 

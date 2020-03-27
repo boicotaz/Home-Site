@@ -36,20 +36,20 @@ class UserService {
         return this.userModel.getUserById(userId);
     }
 
-    createUserWithGoogleAuth(options){
-       return this.userModel.createUserWithGoogleAuth(options).then( () => { return this.getUserbyEmail(options.email)}  );
-    } 
+    createUserWithGoogleAuth(options) {
+        return this.userModel.createUserWithGoogleAuth(options).then(() => { return this.getUserbyEmail(options.email) });
+    }
 
-    getUserbyEmail(email){
+    getUserbyEmail(email) {
         return this.userModel.getUserbyEmail(email);
     }
 
-    updateGoogleIdById(googleId, userId){
+    updateGoogleIdById(googleId, userId) {
         return this.userModel.updateGoogleId(googleId, userId);
     }
 
-    async getUserIdbyName(name) {
-        return this.userModel.getUserIdbyName(name.split(" "));
+    getUserByName(name) {
+        return this.userModel.getUserByName(name.split(" "));
     }
 
     async getAllUsers() {

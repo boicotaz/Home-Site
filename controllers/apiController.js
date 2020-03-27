@@ -42,6 +42,7 @@ apiController.get('/get-users', function (req, res) {
 })
 
 apiController.get('/get-group-details', function (req, res) {
+    console.log('_______________________request for group details by user with id: ', req.user.id, '___________________________');
     groupService.findGroupByUserId(req.user.id).then(group => res.json({ groupName: group.getGroupName(), groupId: group.getGroupId() }));
 })
 

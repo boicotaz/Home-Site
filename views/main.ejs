@@ -29,13 +29,23 @@
                 console.log('ABOUT TO INFORM HOME COMPONENT', loggedInUsersId);
                 var getUserLoggedStatusEventReply = new CustomEvent('LoggedInStatusReply', { detail: loggedInUsersId });
                 document.dispatchEvent(getUserLoggedStatusEventReply);
-            })
+            });
+
+            socket.on('refresh-users-in-group-details', function (usersInGroup) {
+                console.log('about to inform HOME and APP compenent', usersInGroup);
+                let refreshUsersInGroupDetailsEvent = new CustomEvent('refresh-users-in-group-details', { detail: usersInGroup });
+                document.dispatchEvent(refreshUsersInGroupDetailsEvent);
+            });
+
             socket.on('newGroupMessageReceived', function (newMsg) {
-                let notifyGroupForNewMsgEvent = new CustomEvent('newGroupMessageReceived', { detail: newMsg });
+                let notifyGroupForNewMsgEvent = new CustomEvent('newGroupMessageReceived', { detail: newMsg.message });
                 document.dispatchEvent(notifyGroupForNewMsgEvent);
 
-                let newMessageSoundEvent = new CustomEvent('triggerNewMessageSound', { detail: { id: "newMessageSound" } });
-                document.dispatchEvent(newMessageSoundEvent);
+                if (loggedInUser.id != newMsg.currentUserId) {
+                    let newMessageSoundEvent = new CustomEvent('triggerNewMessageSound', { detail: { id: "newMessageSound" } });
+                    document.dispatchEvent(newMessageSoundEvent);
+                }
+
             });
             socket.on('user_in_my_group_connected', function (loggedInUsersId) {
                 console.log("caught socket event user_in_my_group_connected____________________________", loggedInUsersId);
@@ -47,7 +57,8 @@
                 console.log('i received the event change in expense table');
                 let createEvent = new CustomEvent('new-expense', { detail: expenseData });
                 document.dispatchEvent(createEvent);
-            })
+            });
+            
             socket.on('user_in_my_group_disconnected', function (disconnectedUserId) {
                 console.log('disconnect event received by client', disconnectedUserId);
                 let userLoggedOffEvent = new CustomEvent('LoggedOffStatus', { detail: disconnectedUserId });
@@ -68,13 +79,12 @@
             /* the minimum width */
         }
     </style>
-    
-    
+
+
     <script>
-    console.log('INLINE SCRIPT THO');    
+        console.log('INLINE SCRIPT THO');    
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.2.1/bloodhound.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.2.1/typeahead.jquery.min.js"></script>
+    <%- include("template-nav-bar.ejs") %>
     <script type="text/javascript" src="../public/webpack/autoComplete.js"></script>
     <link rel="stylesheet" type="text/css" href="../public/css/main.css">
 
@@ -99,9 +109,6 @@
 </head>
 
 <body>
-    <div id ="navbar"></div>
-    <script type="text/javascript" src="../public/webpack/router.js"></script>
-
 
     <% if (userHasGroup == false){ %>
     <script>
@@ -139,7 +146,7 @@
     </div>
     </div>
     <% } %>
-    
+
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"

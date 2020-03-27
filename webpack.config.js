@@ -13,11 +13,9 @@ module.exports = {
     ]
   },
   entry: {
-    mainPage: './js/mainPage.js',
-    expensesPage: './js/expenses.js',
     autoComplete: './js/autocomplete.js',
     notifcations: './js/notifications.js',
-    router: './js/router.js'
+    app: "./js/app.js"
     // socketClient: './js/socketClient.js'
   },
   output: {

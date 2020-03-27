@@ -21,8 +21,13 @@ export default class MainPage extends React.Component {
         this.state.groupDetails = this.props.groupDetails;
         this.state.currentUser = this.props.currentUser;
         this.state.groupMessages = this.props.groupMessages;
-        console.log("I AM IN MAIN PAGE COMPONENT LETS SEE THE PROPS", this.props);
+
+        // console.log('how many times am i called tho - main page constructor ?');
     }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState(nextProps);  
+      }
 
     componentDidMount() {
         $("#content-container").fadeIn('slow');
@@ -31,10 +36,11 @@ export default class MainPage extends React.Component {
     }
 
     componentWillMount() {
+        // console.log("I AM UNMOUNTED!!!!");
         $("#content-container").css("display", "none");
     }
     render() {
-
+        console.log("MAIN PAGE STATE IS________________________-----___##############################", this.state);
         return (<React.Fragment>
             <div className="row mt-5">
                 <Group usersInGroup={this.state.usersInGroup} groupDetails={this.state.groupDetails} currentUser={this.state.currentUser} > </Group>

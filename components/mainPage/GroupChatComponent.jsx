@@ -13,15 +13,14 @@ export default class GroupChat extends React.Component {
         this.state.groupMessages = this.props.groupMessages;
         this.state.groupDetails = this.props.groupDetails;
 
-        document.addEventListener('newGroupMessageCreated', e => {
-            socket.emit("broadcastNewGroupMessage", e.detail);
-        });
+        document.addEventListener('newGroupMessageCreated', this.newGroupMessageCreatedEventHandler);
 
-        document.addEventListener('newGroupMessageReceived', e => {
-            let newMsg = e.detail;
-            this.setState({ groupMessages: [...this.state.groupMessages, newMsg] });
+        // document.addEventListener('newGroupMessageReceived', e => {
+        //     let newMsg = e.detail;
+        //     console.log(' group chat component caught event', newMsg);
+        //     this.setState({ groupMessages: [...this.state.groupMessages, newMsg] });
 
-        });
+        // });
 
         document.addEventListener('userChangedPhoto', e => {
             let userDetail = this.state.usersInGroup.get(e.detail.userId);
@@ -30,6 +29,15 @@ export default class GroupChat extends React.Component {
                 this.forceUpdate();
             }
         });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState(nextProps);  
+    }
+
+    newGroupMessageCreatedEventHandler = (e) => {
+        socket.emit("broadcastNewGroupMessage", e.detail);
+        console.log('####_____lets emit the broadcast event______####')
     }
 
     submitMessageEnterKey = (e) => {
@@ -61,16 +69,28 @@ export default class GroupChat extends React.Component {
 
     renderNewMessage = (msgText) => {
         let date = new Date();
-        let newMsg = {};
-        newMsg.userId = this.state.currentUser.id;
-        newMsg.messageText = msgText;
-        newMsg.timeSent = date.toLocaleString().replace(",", "").replace(/:.. /, " ");
-        this.broadcastMessage(newMsg);
+        let newMsgDetails = {};
+        newMsgDetails.userId = this.state.currentUser.id;
+        newMsgDetails.messageText = msgText;
+        newMsgDetails.timeSent = date.toLocaleString().replace(",", "").replace(/:.. /, " ");
 
-        this.setState({ groupMessages: [...this.state.groupMessages, newMsg] });
+        let msgProperties = ['userId', 'messageText', 'timeSent'];
+        let msg = {};
+        for (let key of Object.keys(newMsgDetails)) {
+            if (msgProperties.includes(key)) {
+                msg[key] = newMsgDetails[key];
+            }
+        }
+        this.setState({ groupMessages: [...this.state.groupMessages, msg] });
+        console.log('____________in render message_______', msg);
 
-        newMsg.timeSent = date.toMysqlFormat();
-        this.storeNewMessage(newMsg);
+        this.broadcastMessage(newMsgDetails);
+
+        let updateRouterEvent = new CustomEvent('updateMyNewMessage', { detail: msg });
+        document.dispatchEvent(updateRouterEvent);
+
+        newMsgDetails.timeSent = date.toMysqlFormat();
+        this.storeNewMessage(newMsgDetails);
 
     }
 
@@ -84,10 +104,11 @@ export default class GroupChat extends React.Component {
         let groupUsersIds = [];
 
         for (let key of groupUsers.keys()) {
-            if ( key != this.state.currentUser.id)
-            groupUsersIds.push(key);
+            if (key != this.state.currentUser.id)
+                groupUsersIds.push(key);
         }
         newMsgDetails.groupUsersIds = groupUsersIds;
+        newMsgDetails.currentUserId = this.state.currentUser.id;
 
         let broadcastMessageEvent = new CustomEvent('newGroupMessageCreated', { detail: newMsgDetails });
         document.dispatchEvent(broadcastMessageEvent);
@@ -106,12 +127,13 @@ export default class GroupChat extends React.Component {
 
     componentWillUnmount() {
         document.getElementById("searchText").removeEventListener("keydown", this.submitMessageEnterKey, false);
-        document.removeEventListener('newGroupMessageCreated');
-        document.removeEventListener('newGroupMessageReceived');
+        document.removeEventListener('newGroupMessageCreated', this.newGroupMessageCreatedEventHandler);
+        // document.removeEventListener('newGroupMessageReceived');
         this.state.userImageChanged = undefined;
     }
 
     render() {
+        console.log("GROUP CHAT COMPONENT STATE IS________________________-----___##############################", this.state);
         let groupChat = <React.Fragment>
             <div className="container col-4" id="groupChat" style={{ height: '516px' }}>
                 <div className="row">

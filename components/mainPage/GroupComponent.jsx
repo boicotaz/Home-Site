@@ -3,15 +3,19 @@ export default class Group extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log("GROUP PROPS IS________________________-----___##############################", this.props);
         this.state = {}
         this.state.usersInGroup = this.props.usersInGroup;
         // {groupName: String, groupId: integer}
         this.state.groupDetails = this.props.groupDetails;
+        this.state.currentUser = this.props.currentUser;
+        this.state.loggedInMembersId = [];
+
         let usersInGroupId = [];
 
-        for (let key of this.state.usersInGroup.keys() ) {
+        for (let key of this.state.usersInGroup.keys()) {
             usersInGroupId.push(this.state.usersInGroup.get(key).userId);
-        }   
+        }
 
         document.addEventListener('LoggedOffStatus', e => {
             let loggedOffUserId = e.detail;
@@ -25,13 +29,13 @@ export default class Group extends React.Component {
                         }
                     });
 
-                    this.setState({ loggedInMembersId: loggedInMembersId })
+                    this.setState({ loggedInMembersId: loggedInMembersId }) 
                 }
             }
         })
 
         if (getUserLoggedStatusEvent == undefined) {
-            var getUserLoggedStatusEvent = new CustomEvent('LoggedInStatus', { detail: { currentUserId: this.props.currentUser.id, usersInGroupId: usersInGroupId } });
+            var getUserLoggedStatusEvent = new CustomEvent('LoggedInStatus', { detail: { currentUserId: this.state.currentUser.id, usersInGroupId: usersInGroupId } });
 
             document.addEventListener('LoggedInStatusReply', e => {
                 this.setState({ loggedInMembersId: e.detail })
@@ -41,16 +45,21 @@ export default class Group extends React.Component {
 
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState(nextProps);  
+    }
+
     render() {
+
         let groupComponents = [];
         let usersInGroupDetails = this.state.usersInGroup;
 
-        for ( let key of usersInGroupDetails.keys()){
+        for (let key of usersInGroupDetails.keys()) {
             groupComponents.push(<GroupMember userDetails={usersInGroupDetails.get(key)} key={key} groupMemberId={key} loggedInMembersId={this.state.loggedInMembersId} />)
-        } 
+        }
 
         return (
-            
+
             <div id="group-dashboard" className="jumbotron col-3 ml-5">
                 <AddUserInGroupModal usersInGroup={this.state.usersInGroup} groupDetails={this.state.groupDetails}> </AddUserInGroupModal>
                 <h1 className="display-6"> <i className="fa fa-home"> </i> {this.state.groupDetails.groupName} </h1>
