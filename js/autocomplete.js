@@ -1,12 +1,12 @@
 import { userAjax } from "../ajax/userAjax";
 import { grouDetailsAjax } from "../ajax/groupDetailsAjax";
 
-$(document).ready(function () {
+// $(document).ready(function () {
 
-    // groupUserAutocomplete(userAjax, grouDetailsAjax, substringMatcher);
-    userAutocomplete(userAjax, substringMatcher);
+//     // groupUserAutocomplete(userAjax, grouDetailsAjax, substringMatcher);
+//     userAutocomplete(userAjax, substringMatcher);
 
-});
+// });
 
 
 let substringMatcher = function (strs) {
@@ -61,10 +61,10 @@ let groupUserAutocomplete = function (userAjax, groupAjax, matcherFunction) {
     Promise.all([userAjax.getAllUsers(), grouDetailsAjax.getUsersInGroupDetails()]).then(function (usersInfo) {
 
         let [allUsers, groupUsersDetails] = usersInfo;
-        
+
         console.log(groupUsersDetails);
         let idsInGroup = [];
-        for (let key of groupUsersDetails.keys()){
+        for (let key of groupUsersDetails.keys()) {
             let userDetails = groupUsersDetails.get(key);
             idsInGroup.push(userDetails.userId);
         }
@@ -122,4 +122,4 @@ let groupUserAutocomplete = function (userAjax, groupAjax, matcherFunction) {
 // });
 
 
-export {groupUserAutocomplete,substringMatcher} 
+export { groupUserAutocomplete, substringMatcher } 

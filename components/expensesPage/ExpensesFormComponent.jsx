@@ -128,6 +128,11 @@ export default class ExpensesForm extends React.Component {
 
 
     }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState(nextProps);
+    }
+
     render() {
         let debtorFields = [];
 

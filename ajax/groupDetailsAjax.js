@@ -75,6 +75,11 @@ let addUserInGroup = (newUserFullName, groupDetails, usersInGroup) => {
                     console.log('addd user in group - users in group', updatedGroupUsersDetails);
                     usersInGroup = Array.from(updatedGroupUsersDetails);
                     socket.emit('refresh-users-in-group-details', usersInGroup);
+                    $('#user-added-success').show((e) => {
+                        setTimeout(function () {
+                            $('#addUserForm').modal('toggle');
+                        }, 3000);
+                    });
                 });
                 // socket.emit("new-group-user-added", usersInGroup);
             },

@@ -56,13 +56,13 @@ body{
   font-size: 18px;
   line-height: 24px;
   cursor: pointer;
-  color: #fff
+  color: #000
 }
 
 .tt-suggestion:hover {
   color: #f0f0f0;
   /* color:#000; */
-  background-color: #0097cf;
+  background-color: rgb(48, 86, 112);
 }
 
 .tt-suggestion p {

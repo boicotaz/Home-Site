@@ -10,6 +10,11 @@ export default class AddUserInGroupModal extends React.Component {
         this.state.groupDetails = this.props.groupDetails;
         this.state.usersInGroup = this.props.usersInGroup;
     }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState(nextProps);
+    }
+
     componentDidMount() {
         groupUserAutocomplete(userAjax, grouDetailsAjax, substringMatcher);
     }
@@ -63,8 +68,7 @@ export default class AddUserInGroupModal extends React.Component {
                             <div id="alert-success" className="alert alert-success col-12 mt-0" role="alert"
                                 style={{ paddingBottom: "0" }}>
                                 <p className='text-center '>
-                                    <strong>Success!</strong> User: <strong id='strong-added-success'>  added to
-                                group successfully.</strong>
+                                    <strong>Success! User added to group successfully</strong>
                                 </p>
                             </div>
                         </div>

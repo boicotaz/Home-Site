@@ -1,4 +1,6 @@
 import AddUserInGroupModal from "./AddUserInGroupModalCompenent.jsx";
+import GroupMember from "./GroupMemberComponent.jsx";
+
 export default class Group extends React.Component {
 
     constructor(props) {
@@ -9,44 +11,44 @@ export default class Group extends React.Component {
         // {groupName: String, groupId: integer}
         this.state.groupDetails = this.props.groupDetails;
         this.state.currentUser = this.props.currentUser;
-        this.state.loggedInMembersId = [];
+        this.state.loggedInMembersId = this.props.loggedInMembersId;
 
-        let usersInGroupId = [];
+        // let usersInGroupId = [];
 
-        for (let key of this.state.usersInGroup.keys()) {
-            usersInGroupId.push(this.state.usersInGroup.get(key).userId);
-        }
+        // for (let key of this.state.usersInGroup.keys()) {
+        //     usersInGroupId.push(this.state.usersInGroup.get(key).userId);
+        // }
 
-        document.addEventListener('LoggedOffStatus', e => {
-            let loggedOffUserId = e.detail;
-            if (this.state.loggedInMembersId) {
-                if (this.state.loggedInMembersId.includes(loggedOffUserId)) {
-                    let loggedInMembersId = [];
+        // document.addEventListener('LoggedOffStatus', e => {
+        //     let loggedOffUserId = e.detail;
+        //     if (this.state.loggedInMembersId) {
+        //         if (this.state.loggedInMembersId.includes(loggedOffUserId)) {
+        //             let loggedInMembersId = [];
 
-                    loggedInMembersId = this.state.loggedInMembersId.filter(userId => {
-                        if (userId != loggedOffUserId) {
-                            return userId;
-                        }
-                    });
+        //             loggedInMembersId = this.state.loggedInMembersId.filter(userId => {
+        //                 if (userId != loggedOffUserId) {
+        //                     return userId;
+        //                 }
+        //             });
 
-                    this.setState({ loggedInMembersId: loggedInMembersId }) 
-                }
-            }
-        })
+        //             this.setState({ loggedInMembersId: loggedInMembersId })
+        //         }
+        //     }
+        // })
 
-        if (getUserLoggedStatusEvent == undefined) {
-            var getUserLoggedStatusEvent = new CustomEvent('LoggedInStatus', { detail: { currentUserId: this.state.currentUser.id, usersInGroupId: usersInGroupId } });
+        // if (getUserLoggedStatusEvent == undefined) {
+        //     var getUserLoggedStatusEvent = new CustomEvent('LoggedInStatus', { detail: { currentUserId: this.state.currentUser.id, usersInGroupId: usersInGroupId } });
 
-            document.addEventListener('LoggedInStatusReply', e => {
-                this.setState({ loggedInMembersId: e.detail })
-            });
-        }
-        document.dispatchEvent(getUserLoggedStatusEvent);
+        //     document.addEventListener('LoggedInStatusReply', e => {
+        //         this.setState({ loggedInMembersId: e.detail })
+        //     });
+        // }
+        // document.dispatchEvent(getUserLoggedStatusEvent);
 
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState(nextProps);  
+        this.setState(nextProps);
     }
 
     render() {
@@ -75,23 +77,3 @@ export default class Group extends React.Component {
     }
 }
 
-class GroupMember extends React.Component {
-    render() {
-        // let [userFirstName, userLastName, userId] = this.props.user;
-
-        let loggedInStatus;
-        if (this.props.loggedInMembersId === undefined) {
-            loggedInStatus = "btn-danger";
-        }
-        else {
-            if (this.props.loggedInMembersId.includes(this.props.groupMemberId)) {
-                loggedInStatus = "btn-success";
-            }
-            else {
-                loggedInStatus = "btn-danger";
-            }
-        }
-        // btn-danger
-        return (<a className={"btn btn-lg mr-1 mb-2 " + loggedInStatus} href="#" role="button">{this.props.userDetails.firstName}</a>);
-    }
-}
