@@ -25,28 +25,25 @@ function NavigationBar() {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
+          <ul className="navbar-nav mx-auto">
             <li className="nav-item active">
-              <Link to="/home">Home</Link>
-              {/* TODO: instead of text we need the link element to have JUST the favicon ico like before 
-              <a className="nav-link" href="/home">
-                <i className="fa fa-home"></i>
+            <a className="nav-link">
+              <Link style={{color:'white'}} to="/home"><i className="fa fa-home fa-2x"></i></Link>
+              {/* 
                 <span className="sr-only">(current)</span>
-              </a> */}
+              */}</a> 
             </li>
             <li className="nav-item">
-              <Link to="/expenses">Expenses</Link>
-              {/* <a className="nav-link" href="/expenses">
-                <i className="fa fa-usd" aria-hidden="true">
-                  <span className="badge badge-danger"></span>
-                </i>
-              </a> */}
+            <a className="nav-link" href="/expenses">
+              <Link style={{color:'white'}} to="/expenses"><i className="fa fa-usd fa-2x" aria-hidden="true"></i></Link>
+                  {/* <span className="badge badge-danger"></span> */}
+              </a> 
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/">
-                <i className="fa fa-sticky-note-o" aria-hidden="true">
-                  <span className="badge badge-warning"></span>
-                </i>
+                <Link style={{color:'white'}} to ="/expenses"><i className="fa fa-sticky-note-o fa-2x" aria-hidden="true">
+                  {/* <span className="badge badge-warning"></span> */}
+                </i> </Link>
                 {/* Notes */}
               </a>
             </li>
@@ -60,8 +57,8 @@ function NavigationBar() {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <i className="fa fa-bell" aria-hidden="true">
-                  <span className="badge badge-primary"></span>
+                <i style={{color:'white'}} className="fa fa-bell fa-2x" aria-hidden="true">
+                  {/* <span className="badge badge-primary"></span> */}
                 </i>
                 {/* Notifications */}
               </a>
