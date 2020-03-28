@@ -16,9 +16,7 @@ export default class App extends React.Component {
     this.state.groupMessages = this.props.groupMessages;
     this.state.currentUser = this.props.currentUser;
     this.state.loggedInMembersId = [];
-
     this.state.usersInGroup = this.props.usersInGroup;
-
     this.state.view = this.props.view;
     this.state.expenses = this.props.expenses;
     this.state.totals = this.props.totals;
@@ -103,7 +101,13 @@ export default class App extends React.Component {
             }} />
 
             <Route exact path="/expenses" render={(props) => {
-              return <ExpensesPage  {...props} view={this.state.view} expenses={this.state.expenses} totals={this.state.totals} usersInGroupDetails={this.state.usersInGroup}  > </ExpensesPage>
+              return <ExpensesPage 
+               {...props}
+                view={this.state.view}
+                expenses={this.state.expenses}
+                totals={this.state.totals}
+                usersInGroupDetails={this.state.usersInGroup} >
+                  </ExpensesPage>
             }} />
 
           </Switch>
