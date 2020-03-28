@@ -7,7 +7,7 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="../public/js/sign-in-room8s.js"></script>
-  <link rel='icon' href="../public/room8s_logo.ico" type='image/x-icon'/>
+  <link rel='icon' href="../public/room8s_logo.ico" type='image/x-icon' />
   <!------ Include the above in your HEAD tag ---------->
 
   <title>Login Page</title>
@@ -55,9 +55,13 @@
           <h3>Sign In</h3>
           <div class="d-flex justify-content-end social_icon">
             <!-- <span><i class="fab fa-facebook-square"></i></span> -->
-            <span><a id="google-auth" href="google-auth?remember_me=no" style="color: inherit;"><i class="fab fa-google-plus-square"></i></a></span>
+
+            <span><a id="facebook-auth" href="facebook-auth?remember_me=no" style="color: inherit;"><i
+                  class="fab fa-facebook-square"></i></a></span>
+            <span><a id="google-auth" href="google-auth?remember_me=no" style="color: inherit;"><i
+                  class="fab fa-google-plus-square"></i></a></span>
             <!-- <span><i class="fab fa-twitter-square"></i></span> /google-auth -->
-        </div>
+          </div>
         </div>
         <div class="card-body">
           <form action="/validate" method="post">
@@ -94,14 +98,20 @@
     </div>
 
   </div>
- <script>
-   $("#google-auth").on("click", (e) => {
-     if ($("[name=remember_me]").prop("checked")){
-      $("#google-auth").attr("href","google-auth?remember_me=yes");
-     }
+  <script>
+    $("#google-auth").on("click", (e) => {
+      if ($("[name=remember_me]").prop("checked")) {
+        $("#google-auth").attr("href", "google-auth?remember_me=yes");
+      }
 
-   })
-</script>
+    })
+    $("#facebook-auth").on("click", (e) => {
+      if ($("[name=remember_me]").prop("checked")) {
+        $("#facebook-auth").attr("href", "facebook-auth?remember_me=yes");
+      }
+
+    })
+  </script>
 </body>
 
 </html>

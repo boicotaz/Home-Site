@@ -23,11 +23,11 @@ apiController.post('/get-users-in-group', function (req, res) {
         groupService.findUsersInGroup(group.getGroupId()).then((users) => {
             // let userNamesAndIds = users.map(userInGroup => [userInGroup.firstName, userInGroup.lastName, userInGroup.id, userInGroup.profImgExists]);
             let groupUsersDetails = new Map();
-            users.forEach(user=> {
-                groupUsersDetails.set(user.id, {firstName: user.firstName, lastName : user.lastName, profImgExists: user.profImgExists, userId: user.id });
+            users.forEach(user => {
+                groupUsersDetails.set(user.id, { firstName: user.firstName, lastName: user.lastName, profImgExists: user.profImgExists, userId: user.id });
             });
             let groupUsersDetailsString = JSON.stringify([...groupUsersDetails]);
-            res.send(groupUsersDetailsString);  
+            res.send(groupUsersDetailsString);
         });
     })
 });

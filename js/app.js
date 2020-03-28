@@ -4,7 +4,7 @@ import { groupMessagesAjax } from "../ajax/groupMessagesAjax";
 import { expensesAjax } from "../ajax/expensesAjax.js"
 
 console.log('DID WE GET THE LOGGED IN USER?', loggedInUser);
-var renderApp = () => {
+function renderApp () {
 
   Promise.all([grouDetailsAjax.getUsersInGroupDetails(), grouDetailsAjax.getGroupDetails(), groupMessagesAjax.getGroupMessages(), expensesAjax.getExpenseDataAjax(), expensesAjax.getExpenseTotalsDataAjax()]).then((res) => {
     let [usersInGroup, groupDetails, groupMessages, expenseData, expensesTotals] = res;
@@ -19,3 +19,6 @@ var renderApp = () => {
 };
 
 renderApp();
+
+
+export {renderApp}

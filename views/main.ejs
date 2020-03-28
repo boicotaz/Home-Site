@@ -34,6 +34,11 @@
             socket.on('refresh-users-in-group-details', function (usersInGroup) {
                 console.log('about to inform HOME and APP compenent', usersInGroup);
                 let refreshUsersInGroupDetailsEvent = new CustomEvent('refresh-users-in-group-details', { detail: usersInGroup });
+
+                // if ( usersInGroup[usersInGroup.length - 1 ][1].userId == loggedInUser.id){
+                //     console.log('Did they get me?????????');
+                //     // appExport.renderApp();
+                // }
                 document.dispatchEvent(refreshUsersInGroupDetailsEvent);
             });
 

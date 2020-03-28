@@ -98,7 +98,7 @@ export default class App extends React.Component {
 
           <Switch>
 
-            <Route exact path="/home" render={(props) => {
+            <Route path="/home" render={(props) => {
               return <MainPage  {...props} groupDetails={this.state.groupDetails} groupMessages={this.state.groupMessages} usersInGroup={this.state.usersInGroup} currentUser={this.state.currentUser} loggedInMembersId={this.state.loggedInMembersId}   > </MainPage>
             }} />
 

@@ -1,5 +1,6 @@
 const LocalStrategy = require("passport-local").Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 var User = require("./../model/User.js");
 const userService = require('./userService')();
 
@@ -42,33 +43,33 @@ function passportConfigure(passport) {
       }
     )
   );
-  const strategyOptions = {
+  const googleStrategyOptions = {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: "/google-auth/callback"
   }
-  const verifyCallback = async (accessToken, refreshToken, profile, done) => {
+  const googleVerifyCallback = async (accessToken, refreshToken, profile, done) => {
     console.log(profile);
     console.log("email is :___________-", profile.emails[0].value);
-    Promise.all([userService.getUserByGoogleId(profile.id), userService.getUserbyEmail( profile.emails[0].value)]).then((res) => {
+    Promise.all([userService.getUserByGoogleId(profile.id), userService.getUserbyEmail(profile.emails[0].value)]).then((res) => {
       let [userByGoogleId, userByEmail] = res;
-      if (userByGoogleId){
+      if (userByGoogleId) {
         done(null, userByGoogleId);
       }
-      else if (userByEmail){
+      else if (userByEmail) {
         userService.updateGoogleIdById(profile.id, userByEmail.id);
-        done(null,userByGoogleId);
+        done(null, userByGoogleId);
       }
       else {
         let options = {};
-        if (profile.name.givenName){
+        if (profile.name.givenName) {
           options.firstName = profile.name.givenName;
         }
         else {
           options.firstName = 'NoFirstName';
         }
 
-        if (profile.name.familyName){
+        if (profile.name.familyName) {
           options.lastName = profile.name.familyName;
         }
         else {
@@ -76,13 +77,58 @@ function passportConfigure(passport) {
         }
 
         options.googleId = profile.id;
-        options.email = profile.emails[0].value; 
-        userService.createUserWithGoogleAuth(options).then(newUser => done(null,newUser));
+        options.email = profile.emails[0].value;
+        userService.createUserWithGoogleAuth(options).then(newUser => done(null, newUser));
       }
     });
 
   }
-  passport.use(new GoogleStrategy(strategyOptions, verifyCallback))
+  passport.use(new GoogleStrategy(googleStrategyOptions, googleVerifyCallback));
+
+  // Facebook Auth
+  const facebookStrategyOptions = {
+    clientID: process.env.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_APP_SECRET,
+    callbackURL: "/facebook-auth/callback",
+    profileFields: ['id', 'displayName', 'name', 'emails']
+  }
+  const facebookVerifyCallback = async (accessToken, refreshToken, profile, done) => {
+    console.log(profile);
+    console.log("email is :___________-", profile.emails[0].value);
+    Promise.all([userService.getUserByFacebookId(profile.id), userService.getUserbyEmail(profile.emails[0].value)]).then((res) => {
+      let [userByFacebookId, userByEmail] = res;
+      if (userByFacebookId) {
+        done(null, userByFacebookId);
+      }
+      else if (userByEmail) {
+        userService.updateFacebookIdById(profile.id, userByEmail.id);
+        done(null, userByGoogleId);
+      }
+      else {
+        let options = {};
+        if (profile.name.givenName) {
+          options.firstName = profile.name.givenName;
+        }
+        else {
+          options.firstName = 'NoFirstName';
+        }
+
+        if (profile.name.familyName) {
+          options.lastName = profile.name.familyName;
+        }
+        else {
+          options.lastName = 'NoLastName';
+        }
+
+        options.facebookId = profile.id;
+        options.email = profile.emails[0].value;
+        userService.createUserWithFacebookAuth(options).then(newUser => done(null, newUser));
+      }
+    });
+  }
+
+  passport.use(new FacebookStrategy(facebookStrategyOptions, facebookVerifyCallback));
+
   return passport;
 }
 

@@ -39,6 +39,10 @@ var userModelDefinition = {
     googleId: {
         type: Sequelize.STRING,
         defaultValue: null
+    },
+    facebookId: {
+        type: Sequelize.STRING,
+        defaultValue: null
     }
 };
 
@@ -124,6 +128,11 @@ UserModel.updateProfImg = function (userId, profileImgFlag) {
 UserModel.getUserByGoogleId = function (googleId) {
     return this.findOne({ where: { googleId: googleId }, attributes: { exclude: ['password'] } });
 }
+
+UserModel.getUserByFacebookId = function (facebookId) {
+    return this.findOne({ where: { facebookId: facebookId }, attributes: { exclude: ['password'] } });
+}
+
 UserModel.getUserbyEmail = function (email) {
     return this.findOne({ where: { email: email }, attributes: { exclude: ['password'] } });
 }
@@ -132,7 +141,14 @@ UserModel.updateGoogleId = function (googleId, userId) {
     return this.update({ googleId: googleId }, { where: { id: userId } });
 }
 
+UserModel.updateFacebookId = function (facebookId, userId) {
+    return this.update({ facebookId: facebookId }, { where: { id: userId } });
+}
+
 UserModel.createUserWithGoogleAuth = function (options) {
+    return this.create(options);
+}
+UserModel.createUserWithFacebookAuth = function (options) {
     return this.create(options);
 }
 

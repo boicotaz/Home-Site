@@ -15,13 +15,6 @@ export default class GroupChat extends React.Component {
 
         document.addEventListener('newGroupMessageCreated', this.newGroupMessageCreatedEventHandler);
 
-        // document.addEventListener('newGroupMessageReceived', e => {
-        //     let newMsg = e.detail;
-        //     console.log(' group chat component caught event', newMsg);
-        //     this.setState({ groupMessages: [...this.state.groupMessages, newMsg] });
-
-        // });
-
         document.addEventListener('userChangedPhoto', e => {
             let userDetail = this.state.usersInGroup.get(e.detail.userId);
             if (userDetail != undefined) {
@@ -32,7 +25,7 @@ export default class GroupChat extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState(nextProps);  
+        this.setState(nextProps);
     }
 
     newGroupMessageCreatedEventHandler = (e) => {

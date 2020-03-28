@@ -6,8 +6,8 @@ const userService = require('../services/userService')();
 
 logInController.get("/", async (req, res) => {
 
-    if(req.cookies['google_auth_logged'] != undefined && req.isAuthenticated()){
-        if(req.cookies['google_auth_logged'] == 'yes'){
+    if ( req.cookies['auth_logged'] != undefined && req.isAuthenticated()) {
+        if (req.cookies['auth_logged'] == 'yes') {
             if (req.cookies['remember_me'] != undefined) {
                 sessionService.findSessionBySessionId(req.cookies['remember_me']).then(session => {
                     if (Array.isArray(session) && session.length) {
@@ -33,7 +33,9 @@ logInController.get("/", async (req, res) => {
                 res.cookie('remember_me', req.sessionID, { path: '/', httpOnly: true, maxAge: 604800000, secure: true }); // TO DO: sortain the age
             }
         }
-        res.clearCookie('google_auth_logged');
+        if (req.cookies['auth_logged'] != undefined)
+            res.clearCookie('auth_logged');
+
         res.redirect('/home');
     }
     else if (req.isAuthenticated()) {
@@ -86,10 +88,10 @@ logInController.get("/", async (req, res) => {
 
 });
 
-logInController.get('/google-auth', (req,res, next) => {
+logInController.get('/google-auth', (req, res, next) => {
 
-    if(req.query.remember_me == 'yes'){
-        res.cookie('google_login_remember_me', 'yes', { path: '/google-auth/callback', httpOnly: true, maxAge: 604800, secure: true });
+    if (req.query.remember_me == 'yes') {
+        res.cookie('login_remember_me', 'yes', { path: '/google-auth/callback', httpOnly: true, maxAge: 604800, secure: true });
     }
     next();
 
@@ -97,16 +99,41 @@ logInController.get('/google-auth', (req,res, next) => {
     scope: ['profile', 'email']
 }));
 
+
+logInController.get('/facebook-auth', (req, res, next) => {
+
+    if (req.query.remember_me == 'yes') {
+        res.cookie('login_remember_me', 'yes', { path: '/facebook-auth/callback', httpOnly: true, maxAge: 604800, secure: true });
+    }
+    next();
+
+}, passport.authenticate('facebook', {
+    scope: ['email']
+}));
+
+
 logInController.get('/google-auth/callback', passport.authenticate('google'), (req, res) => {
-    let remember_me = 'no' 
-    if(req.cookies['google_login_remember_me']){
+    let remember_me = 'no'
+    if (req.cookies['login_remember_me']) {
         remember_me = 'yes';
-        res.clearCookie('google_login_remember_me');
+        res.clearCookie('login_remember_me');
     };
-    res.cookie('google_auth_logged', remember_me, { path: '/', httpOnly: true, maxAge: 604800000, secure: true }); // TO DO: sortain the age
+    res.cookie('auth_logged', remember_me, { path: '/', httpOnly: true, maxAge: 604800000, secure: true }); // TO DO: sortain the age
 
     res.redirect('/');
 });
+
+logInController.get('/facebook-auth/callback', passport.authenticate('facebook'), (req, res) => {
+    let remember_me = 'no'
+    if (req.cookies['login_remember_me']) {
+        remember_me = 'yes';
+        res.clearCookie('login_remember_me');
+    };
+    res.cookie('auth_logged', remember_me, { path: '/', httpOnly: true, maxAge: 604800000, secure: true }); // TO DO: sortain the age
+
+    res.redirect('/');
+});
+
 
 logInController.post('/validate', function (req, res, next) {
 

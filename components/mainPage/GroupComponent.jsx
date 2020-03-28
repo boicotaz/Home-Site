@@ -13,38 +13,6 @@ export default class Group extends React.Component {
         this.state.currentUser = this.props.currentUser;
         this.state.loggedInMembersId = this.props.loggedInMembersId;
 
-        // let usersInGroupId = [];
-
-        // for (let key of this.state.usersInGroup.keys()) {
-        //     usersInGroupId.push(this.state.usersInGroup.get(key).userId);
-        // }
-
-        // document.addEventListener('LoggedOffStatus', e => {
-        //     let loggedOffUserId = e.detail;
-        //     if (this.state.loggedInMembersId) {
-        //         if (this.state.loggedInMembersId.includes(loggedOffUserId)) {
-        //             let loggedInMembersId = [];
-
-        //             loggedInMembersId = this.state.loggedInMembersId.filter(userId => {
-        //                 if (userId != loggedOffUserId) {
-        //                     return userId;
-        //                 }
-        //             });
-
-        //             this.setState({ loggedInMembersId: loggedInMembersId })
-        //         }
-        //     }
-        // })
-
-        // if (getUserLoggedStatusEvent == undefined) {
-        //     var getUserLoggedStatusEvent = new CustomEvent('LoggedInStatus', { detail: { currentUserId: this.state.currentUser.id, usersInGroupId: usersInGroupId } });
-
-        //     document.addEventListener('LoggedInStatusReply', e => {
-        //         this.setState({ loggedInMembersId: e.detail })
-        //     });
-        // }
-        // document.dispatchEvent(getUserLoggedStatusEvent);
-
     }
 
     componentWillReceiveProps(nextProps) {

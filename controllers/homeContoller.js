@@ -11,7 +11,7 @@ homeController.get("/", passportService.authValidation, async (req, res, next) =
 
     let group = await groupService.findGroupByUserId(req.user.id);
 
-    if (group == null) {
+    if (group == null || !group) {
         res.render("main.ejs", { userHasGroup: false, user: req.user, groupName: null });
     }
     else {

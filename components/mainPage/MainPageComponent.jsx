@@ -30,19 +30,19 @@ export default class MainPage extends React.Component {
     }
 
     componentDidMount() {
-        $("#content-container").fadeIn('slow');
+        $("#mainPageContent").fadeIn('slow');
         let groupChatBody = document.getElementById("groupChatBody");
         groupChatBody.scrollTop = groupChatBody.scrollHeight;
     }
 
     componentWillMount() {
         // console.log("I AM UNMOUNTED!!!!");
-        $("#content-container").css("display", "none");
+        // $("#mainPageContent").css("display", "none");
     }
     render() {
         console.log("MAIN PAGE STATE IS________________________-----___##############################", this.state);
         return (<React.Fragment>
-            <div className="row mt-5">
+            <div id="mainPageContent" className="row mt-5" style={{ display: "none" }}>
                 <Group usersInGroup={this.state.usersInGroup} groupDetails={this.state.groupDetails} currentUser={this.state.currentUser} loggedInMembersId={this.state.loggedInMembersId} > </Group>
                 <GroupChat usersInGroup={this.state.usersInGroup} currentUser={this.state.currentUser} groupMessages={this.state.groupMessages} groupDetails={this.state.groupDetails} ></GroupChat>
             </div>
