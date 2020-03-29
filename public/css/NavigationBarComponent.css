@@ -1,0 +1,30 @@
+li.nav-item:hover{
+    border-radius: 200px 59px 60px 59px;
+    -moz-border-radius: 200px 59px 60px 59px;
+    -webkit-border-radius: 200px 59px 60px 59px;
+    border: 0px solid #000000;
+    background: -moz-linear-gradient(left, #B8B8B8 0%, #2388CB 50%, #144E75 100%);
+    background: -webkit-linear-gradient(left, #B8B8B8 0%, #2388CB 50%, #144E75 100%);
+    background: linear-gradient(to right, #B8B8B8 0%, #2388CB 50%, #144E75 100%);
+    }
+    
+    
+    i.fas,
+    i.fab,i.far {
+      color:#B8B8B8;
+      margin: 8px;
+      padding: 8px;
+      /* color: aqua; */
+      opacity: 0.2;
+    }
+    
+    .selected i{
+      
+      background-color:   #B8B8B8;
+      border-radius: 200px 59px 60px 59px;
+      -moz-border-radius: 200px 59px 60px 59px;
+      -webkit-border-radius: 200px 59px 60px 59px;
+      border: 0px solid #000000;
+     
+      
+    }

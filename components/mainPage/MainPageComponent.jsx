@@ -42,7 +42,7 @@ export default class MainPage extends React.Component {
     render() {
         console.log("MAIN PAGE STATE IS________________________-----___##############################", this.state);
         return (<React.Fragment>
-            <div id="mainPageContent" className="row mt-5" style={{ display: "none" }}>
+            <div id="mainPageContent" className="row mt-5" style={{ display: "none", width:'100vw'}}>
                 <Group usersInGroup={this.state.usersInGroup} groupDetails={this.state.groupDetails} currentUser={this.state.currentUser} loggedInMembersId={this.state.loggedInMembersId} > </Group>
                 <GroupChat usersInGroup={this.state.usersInGroup} currentUser={this.state.currentUser} groupMessages={this.state.groupMessages} groupDetails={this.state.groupDetails} ></GroupChat>
             </div>
