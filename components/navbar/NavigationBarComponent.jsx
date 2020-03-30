@@ -64,9 +64,10 @@ class NavigationBar extends React.Component{
       </ul>
   
   
-      <form className="form-inline">
+      <form id='search-form' className="form-inline">
       
         <input 
+        id='search-bar'
         className="form-control mr-sm-2" 
         type="search" 
         placeholder="Search Users"

@@ -3,10 +3,11 @@ import { grouDetailsAjax } from "../ajax/groupDetailsAjax";
 
 // $(document).ready(function () {
 
-//     // groupUserAutocomplete(userAjax, grouDetailsAjax, substringMatcher);
+//     groupUserAutocomplete(userAjax, grouDetailsAjax, substringMatcher);
 //     userAutocomplete(userAjax, substringMatcher);
 
 // });
+// //asd
 
 
 let substringMatcher = function (strs) {
@@ -36,7 +37,7 @@ let substringMatcher = function (strs) {
 
 let userAutocomplete = function (userAjax, matcherFunction) {
     // create search bar
-    userAjax.getAllUsers().then(function (values) {
+    userAjax.getAllUsers().then((values) => {
         let allUsers = values;
         var users_suggestions = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.whitespace, // see its meaning above
@@ -122,4 +123,4 @@ let groupUserAutocomplete = function (userAjax, groupAjax, matcherFunction) {
 // });
 
 
-export { groupUserAutocomplete, substringMatcher } 
+export { groupUserAutocomplete, substringMatcher,userAutocomplete } 

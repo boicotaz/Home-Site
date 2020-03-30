@@ -31,6 +31,7 @@ export default class MainPage extends React.Component {
 
     componentDidMount() {
         $("#content-container").fadeIn('slow');
+        $(function () {$('[data-toggle="tooltip"]').tooltip()});
         let groupChatBody = document.getElementById("groupChatBody");
         groupChatBody.scrollTop = groupChatBody.scrollHeight;
     }

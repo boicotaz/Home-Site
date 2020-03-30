@@ -1,4 +1,4 @@
-import { groupUserAutocomplete, substringMatcher } from "../../js/autocomplete"
+import { groupUserAutocomplete, substringMatcher,userAutocomplete } from "../../js/autocomplete"
 import { userAjax } from "../../ajax/userAjax";
 import { grouDetailsAjax } from "../../ajax/groupDetailsAjax";
 
@@ -17,6 +17,8 @@ export default class AddUserInGroupModal extends React.Component {
 
     componentDidMount() {
         groupUserAutocomplete(userAjax, grouDetailsAjax, substringMatcher);
+        userAutocomplete(userAjax,substringMatcher);
+
     }
 
     AddUserInGroupFormSubmitHandler = (e) => {
