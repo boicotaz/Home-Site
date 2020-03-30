@@ -14,7 +14,7 @@
 body{
   height: 100%;
   width: 100%;
-  background-image: url('../sign_in_background_image.jpg');
+  background-image:  url('../sign_in_background_image.jpg');
   background-size:cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -23,6 +23,9 @@ body{
   background-position: top;
   font-family: 'Numans', sans-serif;
   color:  #272727;
+  /* Add the blur effect */
+  /* filter: blur(8px);
+  -webkit-filter: blur(8px); */
   /* text-shadow: 0 2px 0 rgba(0, 0, 0, 0.07); */
   }
 

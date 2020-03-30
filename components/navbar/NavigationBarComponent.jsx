@@ -1,6 +1,7 @@
 import {NavLink } from "react-router-dom";
 import React from 'react';
 import '../../public/css/NavigationBarComponent.css'
+import Notifications from "./NotificationsComponent.jsx"
 
 class NavigationBar extends React.Component{
 
@@ -37,18 +38,13 @@ class NavigationBar extends React.Component{
                   <i data-toggle="tooltip" title="Calendar" className="far fa-calendar-alt fa-2x"></i>
                   </NavLink>
               </li>
-              <li className="nav-item" >
-              <NavLink to="/notifications" activeClassName="selected">
-                  <i data-toggle="tooltip" title="Notifications" className="fas fa-bell fa-2x"></i>
-                  </NavLink>
-              </li>
-              <li className="nav-item">
+              <li className="nav-item ">
               <NavLink to="/tasks" activeClassName="selected">
-              <i data-toggle="tooltip" title="Notifications" className="fas fa-tasks fa-2x"></i>
+              <i data-toggle="tooltip" title="tasks" className="fas fa-tasks fa-2x"></i>
                   </NavLink>
               </li>
+              <Notifications></Notifications>
           </ul>
-  
       </div>
       <ul className="nav navbar-nav flex-row">
       

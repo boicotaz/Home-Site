@@ -26,5 +26,11 @@ li.nav-item:hover{
       -webkit-border-radius: 200px 59px 60px 59px;
       border: 0px solid #000000;
      
-      
     }
+
+
+    /* @media (min-width:900px) {
+      .collapse {
+          display: none !important;
+      }
+   }  */
