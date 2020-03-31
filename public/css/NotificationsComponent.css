@@ -1,0 +1,14 @@
+li.nav-item.dropdown{
+    text-align: center;
+    cursor: pointer;
+}
+
+.fa-container{
+    position: relative;
+}
+
+/* .notifications-number{
+    position: "absolute" !important; 
+    left: "60px" !important;
+    top: "6px" !important;
+} */

@@ -2,13 +2,23 @@ import {NavLink } from "react-router-dom";
 import React from 'react';
 import '../../public/css/NavigationBarComponent.css'
 import Notifications from "./NotificationsComponent.jsx"
+import {substringMatcher,userAutocomplete} from "../../js/autocomplete"
+import {userAjax} from "../../ajax/userAjax"
+import '../../public/css/autocomplete.css' // this css is enabled even though we dont import it. i import it only for clarification. We need to find a method to make imported css available only to the file that imported it. 
 
 class NavigationBar extends React.Component{
 
+    componentDidMount() {
+        userAutocomplete(userAjax,substringMatcher);
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
     render(){
       return( 
   <React.Fragment>
-  
+
   <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark justify-content-between">
       
       <a href="/" className="navbar-brand"><img
@@ -25,7 +35,7 @@ class NavigationBar extends React.Component{
           <ul className="navbar-nav">
               <li className="nav-item">
               <NavLink to="/home" activeClassName="selected" >
-                  <i data-toggle="tooltip" title="Home" className="fas fa-home fa-2x"></i> 
+                  <i data-toggle="tooltip" title="Home"  className="fas fa-home fa-2x"></i> 
               </NavLink>
               </li>
               <li className="nav-item">
@@ -60,9 +70,10 @@ class NavigationBar extends React.Component{
       </ul>
   
   
-      <form className="form-inline">
+      <form id='search-form' className="form-inline">
       
         <input 
+        id='search-bar'
         className="form-control mr-sm-2" 
         type="search" 
         placeholder="Search Users"

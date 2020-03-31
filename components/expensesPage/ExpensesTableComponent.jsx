@@ -1,4 +1,5 @@
 //React componenent that dynamically creates the expense table
+// import '../../public/css/expensesTableComponent.css';
 export default class ExpensesTable extends React.Component {
     state = {
         expenses: [],

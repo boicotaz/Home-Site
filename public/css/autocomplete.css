@@ -1,11 +1,12 @@
+/* Autocomplete styles */
 .tt-query {
     /* UPDATE: newer versions use tt-input instead of tt-query */
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   }
   
   .tt-hint {
-    /* color: #999; */
-    color: #000
+    color: #999;
+    /* color: #000 */
   }
   
   .tt-menu {
@@ -29,9 +30,9 @@
   }
   
   .tt-suggestion:hover {
-    /* color: #f0f0f0; */
-    color:#000;
-    background-color: #0097cf;
+    color: #f0f0f0;
+    /* color:#000; */
+    background-color: rgb(112, 48, 48);
   }
   
   .tt-suggestion p {
