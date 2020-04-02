@@ -3,6 +3,7 @@
 
 <head>
     <link rel='icon' href="../public/room8s_logo.ico" type='image/x-icon' />
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
     <%- include("headers.ejs") %>
     <script> var loggedInUser = <%- JSON.stringify(user) %> </script>
 
@@ -175,6 +176,7 @@
 
     <div id='CreateFormContent'> </div>
     <audio id="newMessageSound" src="../public/eventually.mp3" preload='auto'></audio>
+    <audio id="newNotificationSound" src="../public/notifications.mp3" preload='auto'></audio>
 </body>
 
 </html>

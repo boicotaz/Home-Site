@@ -8,6 +8,16 @@ import '../../public/css/autocomplete.css' // this css is enabled even though we
 
 class NavigationBar extends React.Component{
 
+    constructor(props){
+        super(props);
+        this.state = {};
+        this.state.notifications = this.props.notifications;
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.setState(nextProps);
+    }
+
     componentDidMount() {
         userAutocomplete(userAjax,substringMatcher);
         $('[data-toggle="tooltip"]').tooltip();
@@ -19,7 +29,7 @@ class NavigationBar extends React.Component{
       return( 
   <React.Fragment>
 
-  <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark justify-content-between">
+  <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark justify-content-between navbar-animation">
       
       <a href="/" className="navbar-brand"><img
           src={"../../public/room8s_logo.png"}
@@ -53,7 +63,7 @@ class NavigationBar extends React.Component{
               <i data-toggle="tooltip" title="tasks" className="fas fa-tasks fa-2x"></i>
                   </NavLink>
               </li>
-              <Notifications></Notifications>
+              <Notifications notifications={this.state.notifications}></Notifications>
           </ul>
       </div>
       <ul className="nav navbar-nav flex-row">

@@ -82,8 +82,10 @@ function socketInit(server) {
     /**
      * @param {Array<userDetails>} usersInGroup - the details we need to update usersInGroup 
      */
-    socket.on('refresh-users-in-group-details', function (usersInGroup) {
-      console.log("caught refresh event with even data", usersInGroup);
+    socket.on('refresh-users-in-group-details', function (refreshUsersInGroupEventDetails) {
+      console.log("caught refresh event with even data", refreshUsersInGroupEventDetails);
+
+      let usersInGroup = refreshUsersInGroupEventDetails.usersInGroup;
 
       usersInGroupIds = usersInGroup.map(userInGroup => {
         return userInGroup[0];
@@ -92,24 +94,24 @@ function socketInit(server) {
       for (const [client, userInLoggedInList] of sequenceNumberByClient) {
         // client.emit('user_changed_photo', userDetails);
         if (usersInGroupIds.includes(userInLoggedInList.id)) {
-          client.emit('refresh-users-in-group-details', usersInGroup);
+          client.emit('refresh-users-in-group-details', refreshUsersInGroupEventDetails);
         }
       }
 
     });
 
-    socket.on('new-expense', function (data) {
-      console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx yeaaah new expense happened: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX', data);
-      console.log('And users registered as online are: ', sequenceNumberByClient);
-      groupService.findGroupByUserId(1).then((group) => {
-        console.log('passed 1');
+    socket.on('new-expense', function (newExpenseDetails) {
+
+      groupService.findGroupByUserId(newExpenseDetails.currentUser.id).then((group) => {
+
         groupService.findUsersInGroup(group.getGroupId()).then((users) => {
-          console.log('passed 2');
+
           let usersIdInGroup;
           usersIdInGroup = users.map(user => user.id);
+
           for (const [client, userInLoggedInList] of sequenceNumberByClient) {
             if (usersIdInGroup.includes(userInLoggedInList.id)) {
-              client.emit('user_in_my_group_added_expense', data);
+              client.emit('user_in_my_group_added_expense', newExpenseDetails);
             }
           }
 

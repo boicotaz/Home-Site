@@ -40,7 +40,7 @@ export default class ExpensesForm extends React.Component {
             newExpense.push({ creditor: creditor.id, debtor: elem.id, when: info.date, description: info.desc, credit: creditor.credit, debt: elem.debt, creditorName, debtorName: debtorNames[index] })
         });
 
-        expensesAjax.storeNewExpense(postFormData, newExpense, socket);
+        expensesAjax.storeNewExpense(postFormData, newExpense, socket, this.state.currentUser);
 
     }
 
@@ -114,6 +114,7 @@ export default class ExpensesForm extends React.Component {
         this.state.usersInGroup = this.props.usersInGroup;
         this.state.evenly = true;
         this.state.credit = 0;
+        this.state.currentUser = this.props.currentUser;
 
         document.addEventListener('clear-expense-form', e => {
             // let state = {};

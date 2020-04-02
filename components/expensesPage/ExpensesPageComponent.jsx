@@ -15,6 +15,7 @@ export default class ExpensesPage extends React.Component {
         this.state.expenses = this.props.expenses;
         this.state.totals = this.props.totals;
         this.state.usersInGroupDetails = this.props.usersInGroupDetails;
+        this.state.currentUser = this.props.currentUser;
     }
 
     componentWillReceiveProps(nextProps) {
@@ -53,7 +54,7 @@ export default class ExpensesPage extends React.Component {
         else if (this.state.view == "allExpenses") {
             buttonText = "View All Expenses";
         }
-        let expensesForm = <ExpensesForm usersInGroup={this.state.usersInGroupDetails} />;
+        let expensesForm = <ExpensesForm usersInGroup={this.state.usersInGroupDetails} currentUser={this.state.currentUser} />;
         let expensePage =
             <div id='expenses-content' className="container" style={{ marginTop: '250px' }} >
                 <div className="row" id="buttons-row">

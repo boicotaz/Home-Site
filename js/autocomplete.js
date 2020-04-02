@@ -76,12 +76,16 @@ let groupUserAutocomplete = function (userAjax, groupAjax, matcherFunction) {
             if (!idsInGroup.includes(elem[1])) return elem;
         });
 
+        console.log('correctUsers are now', correctUsers);
+
+
         var add_in_group_suggestions = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.whitespace, // see its meaning above
             queryTokenizer: Bloodhound.tokenizers.whitespace, // see its meaning above
             local: correctUsers
         });
 
+        $('#add-user-in-group-field').typeahead('destroy');
         $('#add-user-in-group-field').typeahead({
             hint: true,
             highlight: true,
@@ -123,4 +127,4 @@ let groupUserAutocomplete = function (userAjax, groupAjax, matcherFunction) {
 // });
 
 
-export { groupUserAutocomplete, substringMatcher,userAutocomplete } 
+export { groupUserAutocomplete, substringMatcher, userAutocomplete } 

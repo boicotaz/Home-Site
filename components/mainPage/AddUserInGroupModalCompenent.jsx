@@ -10,14 +10,21 @@ export default class AddUserInGroupModal extends React.Component {
         this.state = {};
         this.state.groupDetails = this.props.groupDetails;
         this.state.usersInGroup = this.props.usersInGroup;
+        this.state.currentUser = this.props.currentUser;
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState(nextProps);
     }
 
-    componentDidMount() {
+    componentDidUpdate() {
+        console.log('i was called at least');
         groupUserAutocomplete(userAjax, grouDetailsAjax, substringMatcher);
+    }
+
+    componentDidMount() {
+        // console.log('i was called at least');
+        // groupUserAutocomplete(userAjax, grouDetailsAjax, substringMatcher);
     }
 
     AddUserInGroupFormSubmitHandler = (e) => {
@@ -28,7 +35,7 @@ export default class AddUserInGroupModal extends React.Component {
             // submitData.set(input.name, input.value);
             submitData[input.name] = input.value;
         });
-        grouDetailsAjax.addUserInGroup(submitData, this.state.groupDetails, this.state.usersInGroup);
+        grouDetailsAjax.addUserInGroup(submitData, this.state.groupDetails, this.state.usersInGroup, this.state.currentUser);
     }
 
     render() {

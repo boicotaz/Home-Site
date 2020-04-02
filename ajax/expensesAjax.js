@@ -39,7 +39,7 @@ let getExpenseTotalsDataAjax = function () {
 
 
 //Pass the data to backend so it will store them in our db
-let storeNewExpense = function (postData, newExpense, clientSocket) {
+let storeNewExpense = function (postData, newExpense, clientSocket, currentUser) {
     $.ajax({
         url: '/home/expenses/create-expense',
         method: 'POST',
@@ -59,9 +59,12 @@ let storeNewExpense = function (postData, newExpense, clientSocket) {
                     }, 3000);
                 })
             })
-            // $("#alert-success").;
 
-            clientSocket.emit('new-expense', newExpense);
+            let newExpenseDetails = {};
+            newExpenseDetails.newExpense = newExpense;
+            newExpenseDetails.currentUser = currentUser;
+
+            clientSocket.emit('new-expense', newExpenseDetails);
         },
         error: function (error) {
             console.log(error);

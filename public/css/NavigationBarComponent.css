@@ -54,3 +54,26 @@ li.nav-item:hover{
   width: auto;
     /* the minimum width */
 }
+
+.navbar-animation {
+
+  animation-name: moveInTop;
+  animation-duration: 1.5s;
+}
+
+
+@keyframes moveInTop {
+  0%{
+      opacity: 0;
+      transform: translateY(-50%);
+  }
+
+  80% {
+      transform: translateY(15%);
+  }
+
+  100% {
+      opacity: 1;
+      transform: translate(0);
+  }
+}

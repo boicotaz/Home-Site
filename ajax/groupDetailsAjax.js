@@ -58,7 +58,7 @@ let getUsersInGroupDetails = function getUsersInGroupDetails() {
     })
 }
 
-let addUserInGroup = (newUserFullName, groupDetails, usersInGroup) => {
+let addUserInGroup = (newUserFullName, groupDetails, usersInGroup, currentUser) => {
     let postData = { newUserData: newUserFullName, groupDetails: groupDetails };
 
     return new Promise((resolve, reject) => {
@@ -74,10 +74,18 @@ let addUserInGroup = (newUserFullName, groupDetails, usersInGroup) => {
                 grouDetailsAjax.getUsersInGroupDetails().then(updatedGroupUsersDetails => {
                     console.log('addd user in group - users in group', updatedGroupUsersDetails);
                     usersInGroup = Array.from(updatedGroupUsersDetails);
-                    socket.emit('refresh-users-in-group-details', usersInGroup);
+
+                    let refreshUsersInGroupEventDetails = {};
+                    refreshUsersInGroupEventDetails.usersInGroup = usersInGroup;
+                    refreshUsersInGroupEventDetails.currentUser = currentUser;
+
+                    socket.emit('refresh-users-in-group-details', refreshUsersInGroupEventDetails);
                     $('#user-added-success').show((e) => {
                         setTimeout(function () {
                             $('#addUserForm').modal('toggle');
+                            $('#add-user-in-group-field').val("");
+                            $('#user-added-success').hide();
+
                         }, 3000);
                     });
                 });
