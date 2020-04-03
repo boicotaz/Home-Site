@@ -8,7 +8,7 @@ export default class Group extends React.Component {
         console.log("GROUP PROPS IS________________________-----___##############################", this.props);
         this.state = {}
         this.state.usersInGroup = this.props.usersInGroup;
-        // {groupName: String, groupId: integer}
+        // {groupName: String, groupId: integer}    
         this.state.groupDetails = this.props.groupDetails;
         this.state.currentUser = this.props.currentUser;
         this.state.loggedInMembersId = this.props.loggedInMembersId;

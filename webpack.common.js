@@ -20,7 +20,7 @@ module.exports = {
   },
   entry: {
     autoComplete: './js/autocomplete.js',
-    notifcations: './js/notifications.js',
+    notifications: './js/notifications.js',
     app: "./js/app.js"
     
   },
