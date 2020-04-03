@@ -1,13 +1,13 @@
 li.nav-item:hover{
   border: 0px solid #000000;
-  border-radius: 8px;
+  border-radius: .8rem;
   background-color:#282828;
   }
   
   
   li.nav-item{
-    width: 100px;
-    height: 60px;
+    width: 10rem;
+    height: 6rem;
     }
   
   .nav-item a {
@@ -21,36 +21,39 @@ li.nav-item:hover{
   i.fab,i.far {
     display:inline-block;
     color:#B8B8B8;
-    padding: 15px;
+    padding: 1.5rem;
     
-    height: 60px; 
+    height: 6rem; 
     text-align: center;
-    font-size: 30px;
+    font-size: 3rem;
     
   }
   
   i.fa-sign-out-alt{
-    font-size: 23px;
+    font-size: 2.3rem;
   }
   
   i.fa-user{
-    font-size: 23px;
+    font-size: 2.3rem;
   }
   
   
   .selected i{
      color:#3062c7;
-     border-bottom: 3.2px solid #3062c7;
+     border-bottom: 0.3rem solid #3062c7;
   }
   
   
   @media (min-width: 768px) {
      .navbar {
-      height: 60px;
+      height: 6rem;
       }
   }
 
 .tooltip-inner {
+  font-size: 1.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   width: auto;
     /* the minimum width */
 }

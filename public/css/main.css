@@ -13,6 +13,10 @@
   outline: solid #f00 1px !important; */
 }
 
+html {
+  font-size: 62.5%; 
+}
+
 body{
   height: 100%;
   width: 100%;
@@ -37,7 +41,7 @@ body{
 
 
 .btn {
-  min-width: 132px;
+  min-width: 13rem;
 }
 
 
@@ -45,14 +49,13 @@ body{
   background: rgba(76,76,76,1)  !important;
 } */
 #groupChat {
-  box-shadow: 2px -1px 11px -2px rgba(0,0,0,0.75);
+  box-shadow: .2rem -.1rem 1.1rem -.2rem rgba(0,0,0,0.75);
   animation-name: moveInRight;
   animation-duration: 1.5s;
 }
 
 #group-dashboard{
-  box-shadow: 2px -1px 11px -2px rgba(0,0,0,0.75);
-
+  box-shadow: .2rem -.1rem 1.1rem -.2rem rgba(0,0,0,0.75);
   animation-name: moveInLeft;
   animation-duration: 1.5s;
 }
@@ -92,7 +95,7 @@ body{
 
 
 .input-group-prepend span{
-  width: 50px;
+  width: 5rem;
   background-color: rgb(7, 91, 124);
   color: black;
   border:0 !important;
@@ -102,47 +105,46 @@ body{
 /* Scroll Bar Stylings */
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 1rem;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey; 
-  border-radius: 10px;
+  box-shadow: inset 0 0 .5rem grey; 
+  border-radius: 1rem;
 }
   
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: red; 
-  border-radius: 10px;
+  background: black; 
+  border-radius: 1rem;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b30000; 
+  background: #B8B8B8;
 }
 
 .bttn {
   transition: all .2s;
   display: inline-block;
   white-space: nowrap;
-  box-shadow: 1px 2.5px 5px rgba(0,0,0,.2);
+  box-shadow: .1rem .25rem .5rem rgba(0,0,0,.2);
   position: relative;
 }
 
 .bttn-pill {
-  padding:  12px 20px;
-  border-radius: 500px;
+  padding:  1.2rem 2rem;
+  border-radius: 50rem;
 }
 
 .bttn:hover{
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,.2);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,.2);
 }
-
 .bttn:active{
     transform: translateY(-1px);
-    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.2);
 }
 
 .bttn::after{

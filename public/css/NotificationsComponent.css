@@ -51,6 +51,9 @@ li.nav-item.dropdown{
     }
   }
 
+.badge--font{
+    font-size: 1.1rem;
+}
 .fa-bell--animation {
     /* transition: all .2s; */
     animation-name: rotateViolently;
@@ -58,3 +61,41 @@ li.nav-item.dropdown{
     animation-timing-function: ease-in;
 }
 
+.dropdown-menu--rounded {
+    border-radius: 1rem 1rem 1rem 1rem;
+    -moz-border-radius: 1rem 1rem 1rem 1rem;
+    -webkit-border-radius: 1rem 1rem 1rem 1rem;
+    border: 0px solid #000000;
+}
+
+.dropdown-header--font {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.dropdown-header--grey {
+    color: #AAAAAA;
+}
+
+.dropdown-item--custom-width{
+    max-width: 97%;
+    margin: 0 auto;
+}
+
+.dropdown-item--shadow:hover{
+    border-radius: 1rem 1rem 1rem 1rem;
+    background-color:#282828;
+}
+
+.dropdown-item:last-child{
+    margin-bottom: 0.8rem;
+}
+
+.img-pos{
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    height:80%;
+    width: 80%;
+}

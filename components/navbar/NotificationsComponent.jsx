@@ -36,41 +36,35 @@ export default class Notifications extends React.Component {
             <li className="nav-item dropdown" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div className="fa-container">
                     <i id="bell" data-toggle="tooltip" title="Notifications" className="fas fa-bell fa-2x "></i>
-                    <i className="badge badge-danger" style={newNotificationsStyle}>{this.state.notifications.newNotificationsSum}</i>
+                    <i className="badge badge-danger badge--font" style={newNotificationsStyle}>{this.state.notifications.newNotificationsSum}</i>
                 </div>
-                <div className="dropdown-menu dropdown-menu-right" style={{ backgroundColor: "#008b8b", width: "400px" }}
+                <div className="dropdown-menu dropdown-menu-right p-0 dropdown-menu--rounded bg-dark" style={{ width: "40rem" }}
                     aria-labelledby="navbarDropdownMenuLink">
-                    <div className="dropdown-item pl-0 pr-0 border-top border-dark">
-                        <div className="container h-100">
-                            {/* <div class="dropdown-divider"> </div> */}
+                    <span className="dropdown-header dropdown-header--font dropdown-header--grey ">Notifications</span>
 
-                            <div className="row mt-1 h-100">
-                                <div className="col-2 ml-0 pl-0">
-                                    <img src="/public/info.png" alt="UserImg" />
-                                </div>
-                                <div className="col-10">
-                                    <p className="text-light rounded" style={{ width: '100%', overflowWrap: "break-word", whiteSpace: "pre-line" }}>Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify</p>
-                                </div>
+                    <div className="dropdown-item p-0 pt-3 pb-3 h-100 dropdown-item--custom-width dropdown-item--shadow">
+                        <div className="row m-1 p-0 ml-3 align-content-center" style={{ maxHeight: '8rem', overflowY: 'auto', height: "8rem" }}>
+                            <div className="col-2 ml-0 pl-0 pr-0">
+                                <img src="/public/38k17x.png" className="img-thumbnail rounded-circle img-pos" alt="UserImg" />
                             </div>
-                            {/* , wordBreak:"break-word" overflowWrap: "break-word" */}
+                            <div className="col-10 p-0">
+                                <p className="text-light rounded m-0" style={{ width: '100%', overflowWrap: "break-word", whiteSpace: "pre-line", fontSize: "1.4rem" }}>Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify</p>
+                            </div>
                         </div>
-
+                        {/* , wordBreak:"break-word" overflowWrap: "break-word" */}
                     </div>
-                    <div className="dropdown-item pl-0 pr-0 border-top border-dark">
-                        <div className="container h-100">
-                            {/* <div class="dropdown-divider"> </div> */}
 
-                            <div className="row mt-1 h-100">
-                                <div className="col-2 ml-0 pl-0">
-                                    <img src="/public/_MG_2496.jpg" alt="UserImg" className="rounded" style={{ height: "50%", width: "50%" }} />
-                                </div>
-                                <div className="col-10">
-                                    <p className="text-light rounded" style={{ width: '100%', overflowWrap: "break-word", whiteSpace: "pre-line" }}>Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify</p>
-                                </div>
+
+                    <div className="dropdown-item p-0 pt-3 pb-3 h-100 dropdown-item--custom-width dropdown-item--shadow">
+                        <div className="row m-1 p-0 ml-3 align-content-center" style={{ maxHeight: '10rem', overflowY: 'auto', height: '8rem' }}>
+                            <div className="col-2 ml-0 pl-0 pr-0">
+                                <img src="/public/38k17x.png" className="img-thumbnail rounded-circle img-pos" alt="UserImg" />
                             </div>
-                            {/* , wordBreak:"break-word" overflowWrap: "break-word" */}
+                            <div className="col-10 p-0">
+                                <p className="text-light rounded m-0" style={{ width: '100%', overflowWrap: "break-word", whiteSpace: "pre-line", fontSize: "1.4rem" }}>Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify Notify</p>
+                            </div>
                         </div>
-
+                        {/* , wordBreak:"break-word" overflowWrap: "break-word" */}
                     </div>
                 </div>
                 {/* </NavLink> */}
