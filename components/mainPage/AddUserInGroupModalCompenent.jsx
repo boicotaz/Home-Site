@@ -1,6 +1,6 @@
 import { groupUserAutocomplete, substringMatcher } from "../../js/autocomplete"
 import { userAjax } from "../../ajax/userAjax";
-import { grouDetailsAjax } from "../../ajax/groupDetailsAjax";
+import { groupDetailsAjax } from "../../ajax/groupDetailsAjax";
 import '../../public/css/autocomplete.css'
 
 export default class AddUserInGroupModal extends React.Component {
@@ -19,12 +19,12 @@ export default class AddUserInGroupModal extends React.Component {
 
     componentDidUpdate() {
         console.log('i was called at least');
-        groupUserAutocomplete(userAjax, grouDetailsAjax, substringMatcher);
+        groupUserAutocomplete(userAjax, groupDetailsAjax, substringMatcher);
     }
 
     componentDidMount() {
         // console.log('i was called at least');
-        // groupUserAutocomplete(userAjax, grouDetailsAjax, substringMatcher);
+        // groupUserAutocomplete(userAjax, groupDetailsAjax, substringMatcher);
     }
 
     AddUserInGroupFormSubmitHandler = (e) => {
@@ -35,7 +35,7 @@ export default class AddUserInGroupModal extends React.Component {
             // submitData.set(input.name, input.value);
             submitData[input.name] = input.value;
         });
-        grouDetailsAjax.addUserInGroup(submitData, this.state.groupDetails, this.state.usersInGroup, this.state.currentUser);
+        groupDetailsAjax.addUserInGroup(submitData, this.state.groupDetails, this.state.usersInGroup, this.state.currentUser);
     }
 
     render() {

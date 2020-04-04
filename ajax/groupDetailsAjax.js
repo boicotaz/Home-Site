@@ -71,7 +71,7 @@ let addUserInGroup = (newUserFullName, groupDetails, usersInGroup, currentUser) 
                 // window.dispatchEvent(evt);
 
                 console.log("#####_____ADDED USER _____####", newGroupUser);
-                grouDetailsAjax.getUsersInGroupDetails().then(updatedGroupUsersDetails => {
+                groupDetailsAjax.getUsersInGroupDetails().then(updatedGroupUsersDetails => {
                     console.log('addd user in group - users in group', updatedGroupUsersDetails);
                     usersInGroup = Array.from(updatedGroupUsersDetails);
 
@@ -97,9 +97,9 @@ let addUserInGroup = (newUserFullName, groupDetails, usersInGroup, currentUser) 
         })
     })
 }
-let grouDetailsAjax = {};
+let groupDetailsAjax = {};
 
-grouDetailsAjax.getGroupDetails = getGroupDetails;
-grouDetailsAjax.getUsersInGroupDetails = getUsersInGroupDetails;
-grouDetailsAjax.addUserInGroup = addUserInGroup;
-export { grouDetailsAjax }
+groupDetailsAjax.getGroupDetails = getGroupDetails;
+groupDetailsAjax.getUsersInGroupDetails = getUsersInGroupDetails;
+groupDetailsAjax.addUserInGroup = addUserInGroup;
+export { groupDetailsAjax }

@@ -1,9 +1,9 @@
 import { userAjax } from "../ajax/userAjax";
-import { grouDetailsAjax } from "../ajax/groupDetailsAjax";
+import { groupDetailsAjax } from "../ajax/groupDetailsAjax";
 
 // $(document).ready(function () {
 
-//     groupUserAutocomplete(userAjax, grouDetailsAjax, substringMatcher);
+//     groupUserAutocomplete(userAjax, groupDetailsAjax, substringMatcher);
 //     userAutocomplete(userAjax, substringMatcher);
 
 // });
@@ -59,7 +59,7 @@ let userAutocomplete = function (userAjax, matcherFunction) {
 
 let groupUserAutocomplete = function (userAjax, groupAjax, matcherFunction) {
     // create add user in group search bar
-    Promise.all([userAjax.getAllUsers(), grouDetailsAjax.getUsersInGroupDetails()]).then(function (usersInfo) {
+    Promise.all([userAjax.getAllUsers(), groupDetailsAjax.getUsersInGroupDetails()]).then(function (usersInfo) {
 
         let [allUsers, groupUsersDetails] = usersInfo;
 
