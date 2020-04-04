@@ -99,3 +99,31 @@ li.nav-item.dropdown{
     height:80%;
     width: 80%;
 }
+
+.dropdown-menu--custom {
+    top: 95%;
+    width: 40rem;
+    border: 1px solid #757575;
+}
+
+div i.fa-custom {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    border-radius: 10rem;
+    background-color: #283395;
+    height: 50%;
+    width: 50%;
+    font-size: 1.4rem;
+    color: #cfe7f7;
+    padding: 1rem;
+    box-shadow: .1rem .25rem .5rem rgba(0,0,0,.2);
+}
+
+div i.fa-custom::before {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
