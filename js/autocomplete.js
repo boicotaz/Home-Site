@@ -1,15 +1,6 @@
 import { userAjax } from "../ajax/userAjax";
 import { groupDetailsAjax } from "../ajax/groupDetailsAjax";
 
-// $(document).ready(function () {
-
-//     groupUserAutocomplete(userAjax, groupDetailsAjax, substringMatcher);
-//     userAutocomplete(userAjax, substringMatcher);
-
-// });
-// //asd
-
-
 let substringMatcher = function (strs) {
 
     return function findMatches(q, cb) {
@@ -97,34 +88,6 @@ let groupUserAutocomplete = function (userAjax, groupAjax, matcherFunction) {
             });
     });
 }
-
-
-// $('#add-user-form').submit(function (event) {
-//     event.preventDefault();
-
-//     let data = $(this).serializeArray();
-//     data[0].user = user;
-
-//     var request = $.ajax({
-//         url: '/add-user-in-group',
-//         type: "POST",
-//         data: data[0],
-//         dataType: "json",
-//         success: function (returnedData) {
-//             $("#strong-added-success").text(data[0].value);
-//             $("#user-added-success").show(function () {
-//                 var myVar = setInterval(myTimer, 3000);
-
-//                 function myTimer() {
-//                     $('#addUserForm').modal('hide');
-//                     window.clearInterval(myVar);
-//                 }
-
-//             });
-//             renderGroup(returnedData.group);
-//         }
-//     });
-// });
 
 
 export { groupUserAutocomplete, substringMatcher, userAutocomplete } 

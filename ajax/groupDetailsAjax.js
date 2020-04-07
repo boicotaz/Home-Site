@@ -1,6 +1,6 @@
 var evt = new CustomEvent('buttons-created', { state: "done" })
 
-let getGroupDetails = function getGroupDetails() {
+const getGroupDetails = () => {
     return new Promise((resolve, reject) => {
         $.ajax({
             url: '/api/get-group-details',
@@ -34,7 +34,7 @@ let getGroupDetails = function getGroupDetails() {
  * @return {Promise<groupUsersDetails>}
  */
 
-let getUsersInGroupDetails = function getUsersInGroupDetails() {
+const getUsersInGroupDetails = () => {
     return new Promise((resolve, reject) => {
         $.ajax({
             url: '/api/get-users-in-group',
@@ -58,7 +58,7 @@ let getUsersInGroupDetails = function getUsersInGroupDetails() {
     })
 }
 
-let addUserInGroup = (newUserFullName, groupDetails, usersInGroup, currentUser) => {
+const addUserInGroup = (newUserFullName, groupDetails, usersInGroup, currentUser) => {
     let postData = { newUserData: newUserFullName, groupDetails: groupDetails };
 
     return new Promise((resolve, reject) => {
@@ -97,9 +97,49 @@ let addUserInGroup = (newUserFullName, groupDetails, usersInGroup, currentUser) 
         })
     })
 }
+
+
+const DeleteUserFromGroup = (newUserFullName, groupDetails, usersInGroup, currentUser) => {
+    let Data = { newUserData: newUserFullName, groupDetails: groupDetails };
+
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: '/delete-user-from-group',
+            type: 'DELETE',
+            data: JSON.stringify(Data),
+            contentType: "application/json",
+            success: function (userDeleted) {
+                
+                console.log("User deleted : ", userDeleted);
+                groupDetailsAjax.getUsersInGroupDetails().then(updatedGroupUsersDetails => {
+                    // console.log('addd user in group - users in group', updatedGroupUsersDetails);
+                    usersInGroup = Array.from(updatedGroupUsersDetails);
+
+                    let refreshUsersInGroupEventDetails = {};
+                    refreshUsersInGroupEventDetails.usersInGroup = usersInGroup;
+                    refreshUsersInGroupEventDetails.currentUser = currentUser;
+
+                    socket.emit('refresh-users-in-group-details', refreshUsersInGroupEventDetails);
+                    $('#user-deleted-success').show((e) => {
+                        setTimeout(function () {
+                            $('#deleteUserForm').modal('toggle');
+                            $('#delete-user-in-group-field').val("");
+                            $('#user-deleted-success').hide();
+                        }, 3000);
+                    });
+                });
+                
+            },
+            error: function (error) {
+                reject(error);
+            }
+        })
+    })
+}
 let groupDetailsAjax = {};
 
 groupDetailsAjax.getGroupDetails = getGroupDetails;
 groupDetailsAjax.getUsersInGroupDetails = getUsersInGroupDetails;
 groupDetailsAjax.addUserInGroup = addUserInGroup;
+groupDetailsAjax.deleteUserFromGroup = DeleteUserFromGroup;
 export { groupDetailsAjax }

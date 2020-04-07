@@ -25,6 +25,11 @@ class GroupService {
     async addUserToGroup(userToAddId, groupDetails) {
         return this.groupModel.addUserToGroup(groupDetails, userToAddId);
     }
+
+    //@@ todo deleteUserFromGroup, maybe async isnt needed here!
+    async deleteUserFromGroup(userToDeleteId, groupDetails) {
+        return this.groupModel.deleteUserFromGroup(groupDetails, userToDeleteId);
+    }
 }
 
 module.exports = getGroupService;

@@ -4,3 +4,4 @@ server.cert
 server.key
 .env
 node_modules
+requests

@@ -28,12 +28,19 @@ homeController.get("/", passportService.authValidation, async (req, res, next) =
 });
 
 homeController.post("/add-user-in-group", function (req, res, next) {
-    let userToAddInGroupData = req.body
+    
+    let userToAddInGroupData = req.body;
     userService.getUserByName(userToAddInGroupData.newUserData.fullName).then((userToAdd) => {
         groupService.addUserToGroup(userToAdd.getUserId(), userToAddInGroupData.groupDetails).then(res.json(userToAdd));
     });
+})
+// @@ todo delete!
 
-
+homeController.delete("/delete-user-from-group", function (req, res) {
+    const userToDeleteFromGroup = req.body;
+    userService.getUserByName(userToDeleteFromGroup.newUserData.fullName).then((userToDelete) => {
+        groupService.deleteUserFromGroup(userToDelete.getUserId(), userToDeleteFromGroup.groupDetails).then(res.json(userToDelete));
+    });
 })
 
 

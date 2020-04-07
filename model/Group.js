@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('../services/sqlService');
 const userModel = require('../model/User');
 
-var groupModelDefinition = {
+const groupModelDefinition = {
     user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -69,6 +69,13 @@ GroupModel.getGroupNameByGroupId = async function (groupId) {
 GroupModel.addUserToGroup = async function (groupDetails, userToAddId) {
     return this.create({ user_id: userToAddId, id: groupDetails.groupId, name: groupDetails.groupName });
 }
+
+//todo deleteUserFromGroup
+GroupModel.deleteUserFromGroup = async function (groupDetails, userToDeleteId) {
+    return this.destroy({ user_id: userToDeleteId, groupId: groupDetails.groupId, name: groupDetails.groupName });
+}
+
+
 GroupModel.findUsersInGroup(1);
 module.exports = GroupModel;
 

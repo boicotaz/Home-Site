@@ -5,6 +5,7 @@
     <link rel='icon' href="../public/room8s_logo.ico" type='image/x-icon' />
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
     <%- include("headers.ejs") %>
+   
     <script> var loggedInUser = <%- JSON.stringify(user) %> </script>
 
     <script src="socket.io/socket.io.js"></script>
@@ -108,7 +109,7 @@
 </head>
 
 <body>
-
+   
     <% if (userHasGroup == false){ %>
     <script>
         window.onload = function () {
