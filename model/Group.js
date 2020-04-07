@@ -71,8 +71,13 @@ GroupModel.addUserToGroup = async function (groupDetails, userToAddId) {
 }
 
 //todo deleteUserFromGroup
-GroupModel.deleteUserFromGroup = async function (groupDetails, userToDeleteId) {
-    return this.destroy({ user_id: userToDeleteId, groupId: groupDetails.groupId, name: groupDetails.groupName });
+GroupModel.deleteUserFromGroup = async function (userId) {
+    console.log('async await');
+    return this.findOne({
+        where: {user_id:userId}
+      })
+      .then(group => { return group.getGroupName() }); 
+      
 }
 
 

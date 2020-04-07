@@ -27,8 +27,10 @@ class GroupService {
     }
 
     //@@ todo deleteUserFromGroup, maybe async isnt needed here!
-    async deleteUserFromGroup(userToDeleteId, groupDetails) {
-        return this.groupModel.deleteUserFromGroup(groupDetails, userToDeleteId);
+    async deleteUserFromGroup(userId) {
+        // console.log('Delete user from group service!');
+        // console.log(userId) exoume to user id = 20
+        return this.groupModel.deleteUserFromGroup(userId);
     }
 }
 

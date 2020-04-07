@@ -28,19 +28,35 @@ homeController.get("/", passportService.authValidation, async (req, res, next) =
 });
 
 homeController.post("/add-user-in-group", function (req, res, next) {
-    
+   
     let userToAddInGroupData = req.body;
     userService.getUserByName(userToAddInGroupData.newUserData.fullName).then((userToAdd) => {
         groupService.addUserToGroup(userToAdd.getUserId(), userToAddInGroupData.groupDetails).then(res.json(userToAdd));
     });
 })
-// @@ todo delete!
 
-homeController.delete("/delete-user-from-group", function (req, res) {
-    const userToDeleteFromGroup = req.body;
-    userService.getUserByName(userToDeleteFromGroup.newUserData.fullName).then((userToDelete) => {
-        groupService.deleteUserFromGroup(userToDelete.getUserId(), userToDeleteFromGroup.groupDetails).then(res.json(userToDelete));
-    });
+
+//  @route      DELETE /delete-user-from-group
+//  @desc       Remove user from his group
+//  @access     Private
+
+homeController.post("/delete-user-from-group", (req, res) =>{
+    console.log('delete control action')
+    try {
+        const {fullName} = req.body;
+        console.log(fullName);
+        userService.getUserByName(fullName)
+        .then((user)=>{
+            groupService.deleteUserFromGroup(user.id)
+        
+        })
+        res.status(200).send("Delete ok ")
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send({msg:"Server Error"})   
+    }
+
+    
 })
 
 

@@ -53,7 +53,7 @@ export default class DeleteUserFromGroupModal extends React.Component {
                             </button>
                         </div>
                         <div className="modal-body">
-                            <form id='delete-user-from-group-form' onSubmit={this.DeleteUserFromGroupFormSubmitHandler} autoComplete="off" method="post">
+                            <form id='delete-user-from-group-form' onSubmit={this.DeleteUserFromGroupFormSubmitHandler} autoComplete="off" method="delete">
                                 <div className="md-form mb-4">
                                     <div className="input-group form-group">
                                         <div className="input-group-prepend">

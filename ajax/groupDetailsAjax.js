@@ -15,24 +15,6 @@ const getGroupDetails = () => {
     })
 }
 
-/**
- * @typedef userDetails 
- * @type {Object}
- * @param {String} userDetails.firstName 
- * @param {String} userDetails.lastName
- * @param {Boolean} userDetails.profImgExists 
- * @param {Integer} userDetails.userId
- */
-
-/**
- * @typedef groupUsersDetails
- * @type {Map<Integer:userDetails>}
- * Key is userId
- */
-
-/**
- * @return {Promise<groupUsersDetails>}
- */
 
 const getUsersInGroupDetails = () => {
     return new Promise((resolve, reject) => {

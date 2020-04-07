@@ -106,6 +106,7 @@ UserModel.getUserIdbyEmail = async function (email) {
     return this.findOne({ where: { email: email } }).then((user) => { console.log(user.getUserId()); return user.getUserId() })
 
 }
+// array[0] = firstName, array[1] = lastName
 UserModel.getUserByName = async function (name) {
     return this.findOne({ where: { firstName: name[0], lastName: name[1] }, attributes: { exclude: ['password'] } });
 }

@@ -52,6 +52,8 @@ class UserService {
     updateFacebookIdById(facebookId, userId) {
         return this.userModel.updateFacebookId(facebookId, userId);
     }
+
+    //@@ name = fullName
     getUserByName(name) {
         return this.userModel.getUserByName(name.split(" "));
     }
