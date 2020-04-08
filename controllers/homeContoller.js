@@ -27,8 +27,7 @@ homeController.get("/", passportService.authValidation, async (req, res, next) =
 
 });
 
-homeController.post("/add-user-in-group", function (req, res, next) {
-   
+homeController.post("/add-user-in-group", function (req, res, next) { 
     let userToAddInGroupData = req.body;
     userService.getUserByName(userToAddInGroupData.newUserData.fullName).then((userToAdd) => {
         groupService.addUserToGroup(userToAdd.getUserId(), userToAddInGroupData.groupDetails).then(res.json(userToAdd));
@@ -40,7 +39,7 @@ homeController.post("/add-user-in-group", function (req, res, next) {
 //  @desc       Remove user from his group
 //  @access     Private
 
-homeController.post("/delete-user-from-group", (req, res) =>{
+homeController.delete("/delete-user-from-group", (req, res) =>{
     console.log('delete control action')
     try {
         const {fullName} = req.body;

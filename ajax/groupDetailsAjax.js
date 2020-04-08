@@ -105,7 +105,7 @@ const DeleteUserFromGroup = (newUserFullName, groupDetails, usersInGroup, curren
                     $('#user-deleted-success').show((e) => {
                         setTimeout(function () {
                             $('#deleteUserForm').modal('toggle');
-                            $('#delete-user-in-group-field').val("");
+                            $('#delete-user-from-group-field').val("");
                             $('#user-deleted-success').hide();
                         }, 3000);
                     });
