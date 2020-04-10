@@ -10,6 +10,10 @@ li.nav-item.dropdown{
 .badge--font{
     font-size: 1.1rem;
 }
+
+.badge--rounded{
+    border-radius: 10rem;
+}
 .fa-bell--animation {
     /* transition: all .2s; */
     animation-name: rotateViolently;
@@ -95,5 +99,5 @@ div i.fa-custom {
         top: 50%;
         transform: translate(-50%,-50%);
     }
-}
 
+}
