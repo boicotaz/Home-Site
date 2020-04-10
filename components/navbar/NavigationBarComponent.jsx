@@ -1,10 +1,8 @@
 import {NavLink } from "react-router-dom";
 import React from 'react';
-// import '../../public/css/NavigationBarComponent.css'
 import Notifications from "./NotificationsComponent.jsx"
 import {substringMatcher,userAutocomplete} from "../../js/autocomplete"
 import {userAjax} from "../../ajax/userAjax"
-import '../../public/css/autocomplete.css' // this css is enabled even though we dont import it. i import it only for clarification. We need to find a method to make imported css available only to the file that imported it. 
 
 class NavigationBar extends React.Component{
 

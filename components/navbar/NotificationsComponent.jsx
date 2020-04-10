@@ -1,5 +1,3 @@
-// import '../../public/css/NavigationBarComponent.css'
-// import '../../public/css/NotificationsComponent.css'
 export default class Notifications extends React.Component {
 
     constructor(props) {
@@ -26,7 +24,7 @@ export default class Notifications extends React.Component {
     }
 
     render() {
-        let newNotificationsStyle = { position: "absolute", left: "60px", top: "6px" };
+        let newNotificationsStyle = { position: "absolute", left: "55%", top: "8%" };
 
         if (this.state.notifications.newNotificationsSum == 0) {
             newNotificationsStyle.display = "none";
@@ -36,7 +34,7 @@ export default class Notifications extends React.Component {
             <li className="nav-item dropdown" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div className="fa-container">
                     <i id="bell" data-toggle="tooltip" title="Notifications" className="fas fa-bell fa-2x "></i>
-                    <i className="badge badge-danger badge--font" style={newNotificationsStyle}>{this.state.notifications.newNotificationsSum}</i>
+                    <i className="badge badge-pill badge-danger badge--font" style={newNotificationsStyle}>{this.state.notifications.newNotificationsSum}</i>
                 </div>
                 <div className="dropdown-menu dropdown-menu-right p-0 dropdown-menu--rounded dropdown-menu--custom bg-dark"
                     aria-labelledby="navbarDropdownMenuLink">
