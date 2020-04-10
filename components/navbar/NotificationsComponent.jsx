@@ -1,5 +1,5 @@
 // import '../../public/css/NavigationBarComponent.css'
-import '../../public/css/NotificationsComponent.css'
+// import '../../public/css/NotificationsComponent.css'
 export default class Notifications extends React.Component {
 
     constructor(props) {

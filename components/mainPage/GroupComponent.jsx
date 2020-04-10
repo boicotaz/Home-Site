@@ -38,8 +38,10 @@ export default class Group extends React.Component {
                 <div id='usersInGroup' className="lead">
                     {groupComponents}
                 </div>
+                <div className="u-bttn-container">
                 <a id='add-user' type="button" data-toggle="modal" data-target="#addUserForm"
-                    className="btn btn-warning bttn bttn-pill mt-3">Invite User </a>
+                    className="btn btn-warning bttn bttn--pill mt-3">Invite User </a>
+                </div>
             </div>)
     }
 }

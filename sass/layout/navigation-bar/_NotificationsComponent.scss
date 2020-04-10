@@ -1,0 +1,99 @@
+li.nav-item.dropdown{
+    text-align: center;
+    cursor: pointer;
+}
+
+.fa-container{
+    position: relative;
+}
+
+.badge--font{
+    font-size: 1.1rem;
+}
+.fa-bell--animation {
+    /* transition: all .2s; */
+    animation-name: rotateViolently;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+}
+
+.dropdown {
+    .dropdown-menu {
+        &--custom{
+            top: 95%;
+            width: 40rem;
+            border: 1px solid #757575;
+        }
+    
+        &--rounded {
+            border-radius: 1rem 1rem 1rem 1rem;
+            -moz-border-radius: 1rem 1rem 1rem 1rem;
+            -webkit-border-radius: 1rem 1rem 1rem 1rem;
+            border: 0px solid #000000;
+        }
+    }
+
+    .dropdown-header{
+        &--font {
+            font-size: 2rem;
+            font-weight: 400;
+        }
+    
+        &--grey {
+            color: #AAAAAA;
+        }
+    }
+    
+    .dropdown-item{
+        &--custom-width{
+            max-width: 97%;
+            margin: 0 auto;
+        }
+        &--shadow{
+            &:hover{
+                border-radius: 1rem 1rem 1rem 1rem;
+                background-color:#282828;
+            }
+        }
+        &:last-child{
+            margin-bottom: 0.8rem;
+        }
+    }
+}
+
+
+
+
+.img-pos{
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    height: auto;
+    width: 80%;
+}
+
+
+
+div i.fa-custom {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    border-radius: 10rem;
+    background-color: #283395;
+    height: 50%;
+    width: 50%;
+    font-size: 1.4rem;
+    color: #cfe7f7;
+    padding: 1rem;
+    box-shadow: .1rem .25rem .5rem rgba(0,0,0,.2);
+
+    &::before {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+    }
+}
+

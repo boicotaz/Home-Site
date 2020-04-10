@@ -1,0 +1,20 @@
+@import "abstracts/variables";
+@import "abstracts/mixins";
+
+@import "base/animations.scss";
+@import "base/typography.scss";
+@import "base/utilities.scss";
+@import "base/base";
+
+@import "layout/navigation-bar/NavigationBarComponent";
+@import "layout/navigation-bar/NotificationsComponent";
+
+@import "modules/button";
+@import "modules/scrollbar";
+@import "modules/scrollbar";
+@import "modules/tooltip";
+@import "modules/input";
+
+@import "pages/mainPage/mainPage";
+
+@import "vendors/font-awesome";

@@ -1,0 +1,39 @@
+.u-input-container {
+
+  .form-control {
+    width: 16rem;
+    height:4rem;
+    border-radius: 10rem;
+    border: 0;
+    color: #000000 !important;
+    /* text-align: center; */
+  }
+
+  .input {
+    /* text-align: center; */
+    font-size: 1.6rem;
+    padding-left: 2rem;
+    padding-bottom: 0.7rem;
+    padding-top: 0.7rem;
+    width: 100%;
+
+    &--pill {
+      height:4rem;
+      border-radius: 10rem;
+    }
+
+    &--dark {
+      /* border: 1px solid #66adff; */
+      background-color: #B3B9BF;
+      /* color: rgb(228, 230, 235); */
+      color: #00167B !important;
+    }
+
+    &::placeholder{
+      color: #00167B !important;
+    }
+
+
+  }
+  
+}
