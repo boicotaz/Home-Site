@@ -48,7 +48,6 @@ homeController.delete("/delete-user-from-group", (req, res) =>{
         .then((user)=>{
             groupService.deleteUserFromGroup(user.id)
             //console.log(user.dataValues);
-        
         })
         res.status(200).send("Delete was succesfull! ")
     } catch (err) {

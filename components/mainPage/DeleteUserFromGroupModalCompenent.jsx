@@ -1,4 +1,6 @@
 import React from 'react';
+
+//materialUI
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -6,8 +8,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import axios from 'axios';
 
+//AJAX
+import { groupDetailsAjax } from "../../ajax/groupDetailsAjax";
 export default function DeleteUserAction() {
   const [open, setOpen] = React.useState(false);
   const [userName,setUserName] = React.useState('');
@@ -21,14 +24,9 @@ export default function DeleteUserAction() {
 
   const handleDelete = (e) => {
     e.preventDefault();
-    //console.log(userName);
-    
-    axios.delete('https://192.168.1.1:8082/home/delete-user-from-group', {
-        data: {
-            "fullName": userName
-              }
-      });
-    console.log('axios passed')
+  // DELETE /home/delete-user-from-group
+    groupDetailsAjax.deleteUserFromGroup(userName);
+    console.log('User Deleted with userName :  ',userName)
     setOpen(false);
   };
 

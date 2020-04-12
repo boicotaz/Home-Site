@@ -81,38 +81,21 @@ const addUserInGroup = (newUserFullName, groupDetails, usersInGroup, currentUser
 }
 
 
-const DeleteUserFromGroup = (newUserFullName, groupDetails, usersInGroup, currentUser) => {
-    let Data = { newUserData: newUserFullName, groupDetails: groupDetails };
-
+const DeleteUserFromGroup = (userName) => {
+    const Data  = {
+        "fullName": userName
+          }
     return new Promise((resolve, reject) => {
         $.ajax({
-            url: '/delete-user-from-group',
+            url: '/home/delete-user-from-group',
             type: 'DELETE',
-            data: JSON.stringify(Data),
-            contentType: "application/json",
-            success: function (userDeleted) {
-                
-                console.log("User deleted : ", userDeleted);
-                groupDetailsAjax.getUsersInGroupDetails().then(updatedGroupUsersDetails => {
-                    // console.log('addd user in group - users in group', updatedGroupUsersDetails);
-                    usersInGroup = Array.from(updatedGroupUsersDetails);
-
-                    let refreshUsersInGroupEventDetails = {};
-                    refreshUsersInGroupEventDetails.usersInGroup = usersInGroup;
-                    refreshUsersInGroupEventDetails.currentUser = currentUser;
-
-                    socket.emit('refresh-users-in-group-details', refreshUsersInGroupEventDetails);
-                    $('#user-deleted-success').show((e) => {
-                        setTimeout(function () {
-                            $('#deleteUserForm').modal('toggle');
-                            $('#delete-user-from-group-field').val("");
-                            $('#user-deleted-success').hide();
-                        }, 3000);
-                    });
-                });
-                
+            data: Data,
+            success: function (data) {
+                console.log(data);
+                 
             },
             error: function (error) {
+                console.log('promise error');
                 reject(error);
             }
         })
