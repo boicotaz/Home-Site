@@ -23,6 +23,7 @@ const expensesController = require("./controllers/expensesController");
 const homeController = require('./controllers/homeContoller');
 const apiController = require('./controllers/apiController');
 const logInController = require('./controllers/logInController');
+const notificationsController = require('./controllers/notificationsController');
 
 // Initialize server
 server.listen(process.env.PORT || 8082, process.env.SERVER_IP, () => {
@@ -102,6 +103,9 @@ app.use("/sign-out", signOutController)
 
 //expenses page
 app.use("/home/expenses", expensesController);
+
+//notifications api
+app.use("/notifications", notificationsController);
 
 //get api services
 app.use('/api', apiController);

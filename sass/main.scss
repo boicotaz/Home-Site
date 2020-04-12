@@ -1,3 +1,6 @@
+@import "vendors/font-awesome";
+@import "vendors/bootstrap";
+
 @import "abstracts/variables";
 @import "abstracts/mixins";
 
@@ -10,11 +13,10 @@
 @import "layout/navigation-bar/NotificationsComponent";
 
 @import "modules/button";
-@import "modules/scrollbar";
+@import "modules/autocomplete";
 @import "modules/scrollbar";
 @import "modules/tooltip";
 @import "modules/input";
 
 @import "pages/mainPage/mainPage";
 
-@import "vendors/font-awesome";

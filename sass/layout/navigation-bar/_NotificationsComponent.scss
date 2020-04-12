@@ -26,7 +26,11 @@ li.nav-item.dropdown{
         &--custom{
             top: 95%;
             width: 40rem;
-            border: 1px solid #757575;
+            border: 1px solid #757575 !important;
+            max-height: 80rem;
+            overflow-y: auto;
+
+            // ma: '8rem', overflowY: 'auto', height: "8rem"
         }
     
         &--rounded {
@@ -53,6 +57,11 @@ li.nav-item.dropdown{
             max-width: 97%;
             margin: 0 auto;
         }
+
+        .notification-text{
+            color: $color-md-yellow !important;
+        }
+        
         &--shadow{
             &:hover{
                 border-radius: 1rem 1rem 1rem 1rem;
@@ -64,6 +73,8 @@ li.nav-item.dropdown{
         }
     }
 }
+
+
 
 .img-pos{
     position: absolute;
@@ -85,7 +96,7 @@ div i.fa-custom {
     width: 50%;
     font-size: 1.4rem;
     color: #cfe7f7;
-    padding: 1rem;
+    padding: 1.6rem;
     box-shadow: .1rem .25rem .5rem rgba(0,0,0,.2);
 
     &::before {

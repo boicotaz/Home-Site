@@ -4,8 +4,9 @@
 import NavigationBar from "./navbar/NavigationBarComponent.jsx";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MainPage from "./mainPage/MainPageComponent.jsx";
-import ExpensesPage from "./expensesPage/ExpensesPageComponent.jsx"
-import { expensesAjax } from "../ajax/expensesAjax"
+import ExpensesPage from "./expensesPage/ExpensesPageComponent.jsx";
+import { expensesAjax } from "../ajax/expensesAjax";
+import { notificationsAjax } from "../ajax/notificationsAjax";
 
 export default class App extends React.Component {
 
@@ -21,9 +22,9 @@ export default class App extends React.Component {
     this.state.expenses = this.props.expenses;
     this.state.totals = this.props.totals;
 
-    this.state.notifications = {};
-    this.state.notifications.newNotificationsSum = 0;
-    this.state.notifications.notificationAdded = false;
+    this.state.notifications = this.props.notifications;
+    // this.state.notifications.newNotificationsSum = 0;
+    // this.state.notifications.notificationAdded = false;
 
     document.addEventListener('updateMyNewMessage', e => {
       let newMsg = e.detail;
@@ -50,30 +51,43 @@ export default class App extends React.Component {
         usersInGroupMap.set(userInGroup[0], userInGroup[1]);
       }
 
-      let notifications = this.state.notifications;
-      if (actionsUser.id != this.state.currentUser.id) {
-        notifications.newNotificationsSum++;
-        notifications.notificationAdded = true;
-        document.getElementById("newNotificationSound").play();
-      }
 
+      // let notifications = this.state.notifications;
+      // if (actionsUser.id != this.state.currentUser.id) {
+      //   notifications.newNotificationsSum++;
+      //   notifications.notificationAdded = true;
+      //   document.getElementById("newNotificationSound").play();
+      // }
 
-      this.setState({ usersInGroup: usersInGroupMap, notifications: notifications });
+      this.setState({ usersInGroup: usersInGroupMap });
+
+      let formatedNotification = this.formatNewNotification(actionsUser.id, "group member", "added");
+      notificationsAjax.storeNotification(formatedNotification).then(notification => {
+        if (notification) {
+          this.setState({ notifications: [...this.state.notifications, notification] });
+        }
+      });
     });
 
     document.addEventListener('new-expense', e => {
       expensesAjax.getExpenseTotalsDataAjax().then(totalDebtsForEachUser => {
         let newExpense = expensesAjax.processData(e.detail.newExpense, this.state.usersInGroup);
+        console.log('In add new EXPENSE the event details are: ', e.detail);
 
-        let notifications = this.state.notifications;
-        if (e.detail.currentUser.id != this.state.currentUser.id) {
-          notifications.newNotificationsSum++;
-          notifications.notificationAdded = true;
-          document.getElementById("newNotificationSound").play();
-        }
 
-        this.setState({ expenses: [...this.state.expenses, newExpense], totals: totalDebtsForEachUser, notifications: notifications });
-      })
+
+        this.setState({ expenses: [...this.state.expenses, newExpense], totals: totalDebtsForEachUser });
+        // this.storeNewNotification(formatedNotifcation, notificationsAjax);
+
+        let formatedNotification = this.formatNewNotification(e.detail.currentUser.id, "expense", "add");
+        notificationsAjax.storeNotification(formatedNotification).then(notification => {
+          if (notification) {
+            this.setState({ notifications: [...this.state.notifications, notification] });
+          }
+        });
+
+
+      });
     });
 
     let usersInGroupId = [];
@@ -103,6 +117,7 @@ export default class App extends React.Component {
       var getUserLoggedStatusEvent = new CustomEvent('LoggedInStatus', { detail: { currentUserId: this.state.currentUser.id, usersInGroupId: usersInGroupId } });
 
       document.addEventListener('LoggedInStatusReply', e => {
+        console.log('I caught new user so i will retrigger the rendering___________________');
         this.setState({ loggedInMembersId: e.detail })
       });
     }
@@ -110,6 +125,28 @@ export default class App extends React.Component {
 
   }
 
+  // this.formatNewNotification(e.detail.currentUser.id, "expense", "add", null);
+  // storeNotification(notification, notificationsAjax) {
+  //   notificationsAjax.storeNotification(notification).then(storedNotification => {
+  //     if (storedNotification) {
+  //       this.setState({ notifications: [...this.state.notifications, storedNotification] });
+  //     }
+  //   });
+  // }
+  formatNewNotification(actionUserId, type, details) {
+    let newNotification = {};
+    newNotification.userId = actionUserId;
+    newNotification.groupId = this.state.groupDetails.groupId;
+    newNotification.details = details;
+    newNotification.type = type;
+
+    let date = new Date();
+    // newNotification.createdAt = date.toLocaleString().replace(",", "").replace(/:.. /, " ");
+    newNotification.createdAt = date.toMysqlFormat();
+    // newNotification.createdAt = timestamp;
+
+    return newNotification;
+  }
 
 
   render() {
@@ -118,7 +155,7 @@ export default class App extends React.Component {
       <React.Fragment>
         <BrowserRouter>
 
-          <NavigationBar notifications={this.state.notifications}> </NavigationBar>
+          <NavigationBar notifications={this.state.notifications} currentUser={this.state.currentUser} usersInGroup={this.state.usersInGroup} > </NavigationBar>
 
           <Switch>
 
@@ -145,4 +182,15 @@ export default class App extends React.Component {
   }
 
 }
+
+
+var twoDigits = (d) => {
+  if (0 <= d && d < 10) return "0" + d.toString();
+  if (-10 < d && d < 0) return "-0" + (-1 * d).toString();
+  return d.toString()
+}
+
+Date.prototype.toMysqlFormat = function () {
+  return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
+};
 

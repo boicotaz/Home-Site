@@ -7,16 +7,16 @@ function getNotificationService() {
 
 
 class NotificationService {
-    constructor(NotificationModel){
+    constructor(NotificationModel) {
         this.NotificationModel = NotificationModel;
     }
 
-    getGroupNotifications(groupId) {
-        return this.NotificationModel.getGroupNotifications(groupId);
+    getGroupNotifications(groupDetails) {
+        return this.NotificationModel.getGroupNotifications(groupDetails.groupId);
     }
 
-    storeNewGroupNotification(newMsg) {
-        this.NotificationModel.storeNewGroupNotification(newMsg);
+    storeNotification(notification) {
+        return this.NotificationModel.storeNotification(notification);
     }
 };
 

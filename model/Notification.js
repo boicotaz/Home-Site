@@ -31,10 +31,10 @@ let NotificationModelDefinition = {
     createdAt: {
         type: 'TIMESTAMP',
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-        allowNull: false
+        // allowNull: false
     },
     type: {
-        type:  Sequelize.STRING,
+        type: Sequelize.STRING,
         allowNull: false
     }
 };
@@ -70,3 +70,14 @@ NotificationModel.prototype.getCreatedAt = function () {
     return this.getDataValue('createdAt');
 }
 
+NotificationModel.getGroupNotifications = function (groupId) {
+    return this.findAll({ where: { groupId: groupId } })
+}
+
+NotificationModel.storeNotification = function (notification) {
+
+    return this.create(notification);
+}
+
+
+module.exports = NotificationModel;

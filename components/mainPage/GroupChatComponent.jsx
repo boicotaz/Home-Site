@@ -129,7 +129,7 @@ export default class GroupChat extends React.Component {
         console.log("GROUP CHAT COMPONENT STATE IS________________________-----___##############################", this.state);
         let groupChat = <React.Fragment>
             <div className="container col-3" id="groupChat" style={{ height: '51rem' }}>
-                <div className="row bg-dark " style={{borderRadius: "100rem 100rem 0px 0px",height:"10%" ,maxHeight: "12%", width: "auto", borderBottom:"0.1rem solid #757575"}}>
+                <div className="row bg-dark " style={{ borderRadius: "100rem 100rem 0px 0px", height: "10%", maxHeight: "12%", width: "auto", borderBottom: "0.1rem solid #757575" }}>
                     {/* <div className="col-12 bg-dark rounded-top rounded-right rounded-left border-bottom"  >
                         <div className="row justify-content-start">
                             <img src="/public/room8s_logo.png" className="col-2" />
@@ -138,7 +138,7 @@ export default class GroupChat extends React.Component {
                     </div> */}
                 </div>
 
-                <div className="row scrollbar scrollbar-primary" id="groupChatBody" style={{  maxHeight: '50rem', overflowY: 'auto', height: "60rem" }}>
+                <div className="row scrollbar scrollbar-primary" id="groupChatBody" style={{ maxHeight: '50rem', overflowY: 'auto', height: "60rem" }}>
                     <div className="col-12 bg-dark">
                         {this.state.groupMessages.map(message => {
                             return <Message key={uuidv4()} userImageChanged={this.state.userImageChanged} message={message} currentUser={this.state.currentUser} groupDetails={this.state.groupDetails} usersInGroup={this.state.usersInGroup}></Message>
@@ -146,18 +146,18 @@ export default class GroupChat extends React.Component {
                     </div>
                 </div>
 
-                <div className="row bg-dark align-items-center" style={{ height: '10%', width:"auto", borderTop:".1rem solid #757575", borderRadius: "0rem 0rem 1rem 1rem"}}>
+                <div className="row bg-dark align-items-center" style={{ height: '10%', width: "auto", borderTop: ".1rem solid #757575", borderRadius: "0rem 0rem 1rem 1rem" }}>
 
-                        {/* <div className="input-group offset-2"> */}
-                        <div className="u-input-container ml-4"> 
-                        <input autoComplete="off" id="searchText" placeholder="Type le Message..." type="text" className="form-control input input--pill input--dark" style={{width:"auto"}}>
+                    {/* <div className="input-group offset-2"> */}
+                    <div className="u-input-container ml-4">
+                        <input autoComplete="off" id="searchText" placeholder="Type le Message..." type="text" className="form-control input input--pill input--dark" style={{ width: "auto" }}>
                         </input>
-                        </div>
+                    </div>
 
-                        {/* <div className="input-group-append">
+                    {/* <div className="input-group-append">
                                 <button onClick={this.submitMessageClickKey} className="btn btn-success" type="button">Send</button>
                             </div> */}
-                        {/* </div> */}
+                    {/* </div> */}
 
                 </div>
 
@@ -169,12 +169,3 @@ export default class GroupChat extends React.Component {
 }
 
 
-var twoDigits = (d) => {
-    if (0 <= d && d < 10) return "0" + d.toString();
-    if (-10 < d && d < 0) return "-0" + (-1 * d).toString();
-    return d.toString()
-}
-
-Date.prototype.toMysqlFormat = function () {
-    return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
-};
