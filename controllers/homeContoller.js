@@ -35,7 +35,7 @@ homeController.post("/add-user-in-group", function (req, res, next) {
 })
 
 
-//  @route      DELETE /delete-user-from-group
+//  @route      DELETE home/delete-user-from-group
 //  @desc       Remove user from his group
 //  @access     Private
 
@@ -47,9 +47,10 @@ homeController.delete("/delete-user-from-group", (req, res) =>{
         userService.getUserByName(fullName)
         .then((user)=>{
             groupService.deleteUserFromGroup(user.id)
+            //console.log(user.dataValues);
         
         })
-        res.status(200).send("Delete ok ")
+        res.status(200).send("Delete was succesfull! ")
     } catch (err) {
         console.error(err.message);
         res.status(500).send({msg:"Server Error"})   

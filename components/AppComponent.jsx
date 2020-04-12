@@ -1,10 +1,11 @@
-//import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// edo mporei na mpei to routing
-//Components
 import NavigationBar from "./navbar/NavigationBarComponent.jsx";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+//Components
 import MainPage from "./mainPage/MainPageComponent.jsx";
 import ExpensesPage from "./expensesPage/ExpensesPageComponent.jsx"
+//Ajax
+
 import { expensesAjax } from "../ajax/expensesAjax"
 
 export default class App extends React.Component {

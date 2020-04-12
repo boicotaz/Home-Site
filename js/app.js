@@ -2,6 +2,7 @@ import App from "../components/AppComponent.jsx";
 import { groupDetailsAjax } from "../ajax/groupDetailsAjax";
 import { groupMessagesAjax } from "../ajax/groupMessagesAjax";
 import { expensesAjax } from "../ajax/expensesAjax.js"
+import ReactDOM from 'react-dom'
 
 console.log('DID WE GET THE LOGGED IN USER?', loggedInUser);
 function renderApp () {
