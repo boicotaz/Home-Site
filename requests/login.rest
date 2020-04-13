@@ -1,0 +1,8 @@
+
+POST https://192.168.1.1:8082/validate 
+content-type: application/json
+
+{	
+"email":"stynikkon@auth.gr",
+"password":"6931557798"
+}

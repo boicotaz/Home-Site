@@ -1,0 +1,8 @@
+ 
+ POST https://192.168.1.1:8082/api/get-users-in-group
+ content-type: application/json
+
+{
+    "user": "Stelios",
+    "id": 15
+}

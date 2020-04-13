@@ -1,0 +1,7 @@
+
+POST https://192.168.1.1:8082/home/add-user-in-group
+ content-type: application/json
+
+{
+      "fullName": "subject1 sub",
+}

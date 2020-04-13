@@ -4,8 +4,8 @@
   "description": "",
   "private": true,
   "scripts": {
-    "build-dev": "nodejs node_modules/webpack/bin/webpack.js --mode none --config webpack.dev.js",
-    "build-prod": "nodejs node_modules/webpack/bin/webpack.js --mode none --config webpack.prod.js"
+    "build-dev": "webpack --config webpack.dev.js",
+    "build-prod": "webpack --config webpack.prod.js"
   },
   "author": "Apostolis Gerodimos",
   "license": "MIT",
