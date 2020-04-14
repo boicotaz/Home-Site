@@ -18,7 +18,7 @@ module.exports = {
   },
   entry: {
     autoComplete: './js/autocomplete.js',
-    notifcations: './js/notifications.js',
+    // notifcations: './js/notifications.js',
     app: "./js/app.js"
     // socketClient: './js/socketClient.js'
   },

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "nodejs node_modules/webpack/bin/webpack.js --mode none --config webpack.config.js",
+    "build": "webpack --mode none --config webpack.config.js",
     "watch": "node-sass sass/main.scss public/css/style.css -w"
   },
   "author": "Apostolis Gerodimos",

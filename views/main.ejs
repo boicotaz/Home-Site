@@ -9,15 +9,15 @@
     <script src="socket.io/socket.io.js"></script>
     <script type="text/babel" src="../public/webpack/expensesPage.js"></script>
     <script>
-        let size = (window.innerWidth + 80) / 200;
-        $("html").css("font-size", size + "px");
+        // let size = (window.innerWidth + 80) / 200;
+        // $("html").css("font-size", size + "px");
 
-        window.onresize = () => {
-            let size = (window.innerWidth + 80) / 200;
-            console.log('i was called');
-            $("html").css("font-size", size + "px");
-        }
-        $("html").css("font-size", "10px");
+        // window.onresize = () => {
+        //     let size = (window.innerWidth + 80) / 200;
+        //     console.log('i was called');
+        //     $("html").css("font-size", size + "px");
+        // }
+        // $("html").css("font-size", "10px");
         if (socket === undefined) {
             var socket = io.connect();
             document.addEventListener('triggerNewMessageSound', e => {
@@ -71,7 +71,7 @@
                 let createEvent = new CustomEvent('new-expense', { detail: expenseData });
                 document.dispatchEvent(createEvent);
             });
-            
+
             socket.on('user_in_my_group_disconnected', function (disconnectedUserId) {
                 console.log('disconnect event received by client', disconnectedUserId);
                 let userLoggedOffEvent = new CustomEvent('LoggedOffStatus', { detail: disconnectedUserId });
@@ -92,7 +92,7 @@
     </script>
     <%- include("template-nav-bar.ejs") %>
     <script type="text/javascript" src="../public/webpack/autoComplete.js"></script>
-    
+
 
     <title>Room8s</title>
 

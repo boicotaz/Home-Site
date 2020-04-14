@@ -110,6 +110,12 @@ app.use("/notifications", notificationsController);
 //get api services
 app.use('/api', apiController);
 
+// refresh handle
+
+app.get('/*', function (req, res) {
+  res.redirect('/home');
+});
+
 
 const webpush = require('web-push');
 
