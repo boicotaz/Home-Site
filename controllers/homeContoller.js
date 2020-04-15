@@ -1,5 +1,5 @@
 /** Express router providing home routes
- * @module /home
+ * @module homeController
  * @requires passportService
  * @requires groupService
  * @requires messageService

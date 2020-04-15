@@ -8,7 +8,8 @@
     },
     "opts":{
         "recurse":true,
-        "destination":"./docs/"
+        "destination":"./jsdoc/docs",
+        "template": "./jsdoc/template"
     },
     "templates": {
         "cleverLinks": true,
