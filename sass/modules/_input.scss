@@ -1,8 +1,7 @@
 .u-input-container {
-
   .form-control {
     width: 16rem;
-    height:4rem;
+    height: 4rem;
     border-radius: 10rem;
     border: 0;
     color: #000000 !important;
@@ -18,22 +17,19 @@
     width: 100%;
 
     &--pill {
-      height:4rem;
+      height: 4rem;
       border-radius: 10rem;
     }
 
     &--dark {
       /* border: 1px solid #66adff; */
-      background-color: #B3B9BF;
+      background-color: #b3b9bf;
       /* color: rgb(228, 230, 235); */
-      color: #00167B !important;
+      color: #00167b !important;
     }
 
-    &::placeholder{
-      color: #00167B !important;
+    &::placeholder {
+      color: #00167b !important;
     }
-
-
   }
-  
 }

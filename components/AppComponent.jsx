@@ -9,7 +9,6 @@ import { expensesAjax } from "../ajax/expensesAjax";
 import { notificationsAjax } from "../ajax/notificationsAjax";
 
 export default class App extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {};
@@ -26,22 +25,23 @@ export default class App extends React.Component {
     // this.state.notifications.newNotificationsSum = 0;
     // this.state.notifications.notificationAdded = false;
 
-    document.addEventListener('updateMyNewMessage', e => {
+    document.addEventListener("updateMyNewMessage", e => {
       let newMsg = e.detail;
       this.setState({ groupMessages: [...this.state.groupMessages, newMsg] });
     });
 
-    document.addEventListener('newGroupMessageReceived', e => {
+    document.addEventListener("newGroupMessageReceived", e => {
       let newMsg = e.detail;
-      console.log('the app component caught event');
+      console.log("the app component caught event");
       this.setState({ groupMessages: [...this.state.groupMessages, newMsg] });
-
     });
 
-    document.addEventListener('refresh-users-in-group-details', (e) => {
-      console.log('____ i received the refresh users event in app ___', e.detail);
+    document.addEventListener("refresh-users-in-group-details", e => {
+      console.log(
+        "____ i received the refresh users event in app ___",
+        e.detail
+      );
       let refreshUsersInGroupEventDetails = e.detail;
-
 
       let usersInGroupArray = refreshUsersInGroupEventDetails.usersInGroup;
       let actionsUser = refreshUsersInGroupEventDetails.currentUser;
@@ -50,7 +50,6 @@ export default class App extends React.Component {
       for (let userInGroup of usersInGroupArray) {
         usersInGroupMap.set(userInGroup[0], userInGroup[1]);
       }
-
 
       // let notifications = this.state.notifications;
       // if (actionsUser.id != this.state.currentUser.id) {
@@ -61,32 +60,50 @@ export default class App extends React.Component {
 
       this.setState({ usersInGroup: usersInGroupMap });
 
-      let formatedNotification = this.formatNewNotification(actionsUser.id, "group member", "added");
-      notificationsAjax.storeNotification(formatedNotification).then(notification => {
-        if (notification) {
-          this.setState({ notifications: [...this.state.notifications, notification] });
-        }
-      });
-    });
-
-    document.addEventListener('new-expense', e => {
-      expensesAjax.getExpenseTotalsDataAjax().then(totalDebtsForEachUser => {
-        let newExpense = expensesAjax.processData(e.detail.newExpense, this.state.usersInGroup);
-        console.log('In add new EXPENSE the event details are: ', e.detail);
-
-
-
-        this.setState({ expenses: [...this.state.expenses, newExpense], totals: totalDebtsForEachUser });
-        // this.storeNewNotification(formatedNotifcation, notificationsAjax);
-
-        let formatedNotification = this.formatNewNotification(e.detail.currentUser.id, "expense", "add");
-        notificationsAjax.storeNotification(formatedNotification).then(notification => {
+      let formatedNotification = this.formatNewNotification(
+        actionsUser.id,
+        "group member",
+        "added"
+      );
+      notificationsAjax
+        .storeNotification(formatedNotification)
+        .then(notification => {
           if (notification) {
-            this.setState({ notifications: [...this.state.notifications, notification] });
+            this.setState({
+              notifications: [...this.state.notifications, notification]
+            });
           }
         });
+    });
 
+    document.addEventListener("new-expense", e => {
+      expensesAjax.getExpenseTotalsDataAjax().then(totalDebtsForEachUser => {
+        let newExpense = expensesAjax.processData(
+          e.detail.newExpense,
+          this.state.usersInGroup
+        );
+        console.log("In add new EXPENSE the event details are: ", e.detail);
 
+        this.setState({
+          expenses: [...this.state.expenses, newExpense],
+          totals: totalDebtsForEachUser
+        });
+        // this.storeNewNotification(formatedNotifcation, notificationsAjax);
+
+        let formatedNotification = this.formatNewNotification(
+          e.detail.currentUser.id,
+          "expense",
+          "add"
+        );
+        notificationsAjax
+          .storeNotification(formatedNotification)
+          .then(notification => {
+            if (notification) {
+              this.setState({
+                notifications: [...this.state.notifications, notification]
+              });
+            }
+          });
       });
     });
 
@@ -96,7 +113,7 @@ export default class App extends React.Component {
       usersInGroupId.push(this.state.usersInGroup.get(key).userId);
     }
 
-    document.addEventListener('LoggedOffStatus', e => {
+    document.addEventListener("LoggedOffStatus", e => {
       let loggedOffUserId = e.detail;
       if (this.state.loggedInMembersId) {
         if (this.state.loggedInMembersId.includes(loggedOffUserId)) {
@@ -108,21 +125,27 @@ export default class App extends React.Component {
             }
           });
 
-          this.setState({ loggedInMembersId: loggedInMembersId })
+          this.setState({ loggedInMembersId: loggedInMembersId });
         }
       }
-    })
+    });
 
     if (getUserLoggedStatusEvent == undefined) {
-      var getUserLoggedStatusEvent = new CustomEvent('LoggedInStatus', { detail: { currentUserId: this.state.currentUser.id, usersInGroupId: usersInGroupId } });
+      var getUserLoggedStatusEvent = new CustomEvent("LoggedInStatus", {
+        detail: {
+          currentUserId: this.state.currentUser.id,
+          usersInGroupId: usersInGroupId
+        }
+      });
 
-      document.addEventListener('LoggedInStatusReply', e => {
-        console.log('I caught new user so i will retrigger the rendering___________________');
-        this.setState({ loggedInMembersId: e.detail })
+      document.addEventListener("LoggedInStatusReply", e => {
+        console.log(
+          "I caught new user so i will retrigger the rendering___________________"
+        );
+        this.setState({ loggedInMembersId: e.detail });
       });
     }
     document.dispatchEvent(getUserLoggedStatusEvent);
-
   }
 
   // this.formatNewNotification(e.detail.currentUser.id, "expense", "add", null);
@@ -148,49 +171,82 @@ export default class App extends React.Component {
     return newNotification;
   }
 
-
   render() {
-    console.log("APP STATE IS________________________-----___##############################", this.state);
+    console.log(
+      "APP STATE IS________________________-----___##############################",
+      this.state
+    );
     return (
       <React.Fragment>
         <BrowserRouter>
-
-          <NavigationBar notifications={this.state.notifications} currentUser={this.state.currentUser} usersInGroup={this.state.usersInGroup} > </NavigationBar>
+          <NavigationBar
+            notifications={this.state.notifications}
+            currentUser={this.state.currentUser}
+            usersInGroup={this.state.usersInGroup}
+          >
+            {" "}
+          </NavigationBar>
 
           <Switch>
+            <Route
+              path="/home"
+              render={props => {
+                return (
+                  <MainPage
+                    {...props}
+                    groupDetails={this.state.groupDetails}
+                    groupMessages={this.state.groupMessages}
+                    usersInGroup={this.state.usersInGroup}
+                    currentUser={this.state.currentUser}
+                    loggedInMembersId={this.state.loggedInMembersId}
+                  >
+                    {" "}
+                  </MainPage>
+                );
+              }}
+            />
 
-            <Route path="/home" render={(props) => {
-              return <MainPage  {...props} groupDetails={this.state.groupDetails} groupMessages={this.state.groupMessages} usersInGroup={this.state.usersInGroup} currentUser={this.state.currentUser} loggedInMembersId={this.state.loggedInMembersId}   > </MainPage>
-            }} />
-
-            <Route exact path="/expenses" render={(props) => {
-              return <ExpensesPage
-                {...props}
-                view={this.state.view}
-                expenses={this.state.expenses}
-                totals={this.state.totals}
-                usersInGroupDetails={this.state.usersInGroup}
-                currentUser={this.state.currentUser}
-              >
-              </ExpensesPage>
-            }} />
-
+            <Route
+              exact
+              path="/expenses"
+              render={props => {
+                return (
+                  <ExpensesPage
+                    {...props}
+                    view={this.state.view}
+                    expenses={this.state.expenses}
+                    totals={this.state.totals}
+                    usersInGroupDetails={this.state.usersInGroup}
+                    currentUser={this.state.currentUser}
+                  />
+                );
+              }}
+            />
           </Switch>
-
         </BrowserRouter>
-      </React.Fragment>)
+      </React.Fragment>
+    );
   }
-
 }
 
-
-var twoDigits = (d) => {
+var twoDigits = d => {
   if (0 <= d && d < 10) return "0" + d.toString();
   if (-10 < d && d < 0) return "-0" + (-1 * d).toString();
-  return d.toString()
-}
-
-Date.prototype.toMysqlFormat = function () {
-  return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
+  return d.toString();
 };
 
+Date.prototype.toMysqlFormat = function() {
+  return (
+    this.getUTCFullYear() +
+    "-" +
+    twoDigits(1 + this.getUTCMonth()) +
+    "-" +
+    twoDigits(this.getUTCDate()) +
+    " " +
+    twoDigits(this.getUTCHours()) +
+    ":" +
+    twoDigits(this.getUTCMinutes()) +
+    ":" +
+    twoDigits(this.getUTCSeconds())
+  );
+};

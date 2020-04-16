@@ -1,65 +1,64 @@
-const publicVapidKey = 'BMKMaCxQjf2NtwfODDDx5wCBW51kMsomozcyvFK_O1NUjyS8xspuZDPoKOEMXZoPxS3g5dAvFNxUNpWkvBRqjV4'
-
+const publicVapidKey =
+  "BMKMaCxQjf2NtwfODDDx5wCBW51kMsomozcyvFK_O1NUjyS8xspuZDPoKOEMXZoPxS3g5dAvFNxUNpWkvBRqjV4";
 
 //Check for service worker
-if ('serviceWorker' in navigator) {
-    console.log('service worker api is enabled')
-    window.addEventListener('load', () => {
-        send().catch(err => console.error(err));
-    })
-
-}
-else {
-    console.log('service worker api is not enabled');
+if ("serviceWorker" in navigator) {
+  console.log("service worker api is enabled");
+  window.addEventListener("load", () => {
+    send().catch(err => console.error(err));
+  });
+} else {
+  console.log("service worker api is not enabled");
 }
 
 //Register SW, Register Push, Send Push
 async function send() {
-    //Register Service Worker
-    console.log('Registering Service worker...');
-    console.log('service worker is enabled in navigator');
+  //Register Service Worker
+  console.log("Registering Service worker...");
+  console.log("service worker is enabled in navigator");
 
-    navigator.serviceWorker.register('/public/client/worker.js', {
-        scope: '/public/client/'
-    }).then(register => {
-        console.log('Service Worker Registered...');
-
-        //Register Push
-        console.log('Registering push...');
-
-        register.pushManager.subscribe({
-            userVisibleOnly: true,
-            applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
-        }).then(subscription => {
-            console.log('Push Registered');
-
-            // Send Push Notification
-            console.log('Sending Push...');
-
-            fetch('/subscribe', {
-                method: 'POST',
-                body: JSON.stringify(subscription),
-                headers: {
-                    'content-type': 'application/json'
-                }
-            });
-            console.log('Push Sent...');
-        })
+  navigator.serviceWorker
+    .register("/public/client/worker.js", {
+      scope: "/public/client/"
     })
+    .then(register => {
+      console.log("Service Worker Registered...");
+
+      //Register Push
+      console.log("Registering push...");
+
+      register.pushManager
+        .subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+        })
+        .then(subscription => {
+          console.log("Push Registered");
+
+          // Send Push Notification
+          console.log("Sending Push...");
+
+          fetch("/subscribe", {
+            method: "POST",
+            body: JSON.stringify(subscription),
+            headers: {
+              "content-type": "application/json"
+            }
+          });
+          console.log("Push Sent...");
+        });
+    });
 }
 
-
 function urlBase64ToUint8Array(base64String) {
-    const padding = '='.repeat((4 - base64String.length % 4) % 4);
-    const base64 = (base64String + padding)
-        .replace(/-/g, '+')
-        .replace(/_/g, '/');
+  const padding = "=".repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
 
-    const rawData = window.atob(base64);
-    const outputArray = new Uint8Array(rawData.length);
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
 
-    for (let i = 0; i < rawData.length; ++i) {
-        outputArray[i] = rawData.charCodeAt(i);
-    }
-    return outputArray;
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
 }

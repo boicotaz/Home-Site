@@ -1,20 +1,20 @@
 #groupChat {
-    /* box-shadow: .2rem -.1rem 1.1rem -.2rem rgba(0,0,0,0.75); */
-    animation-name: moveInRight;
-    animation-duration: 1.5s;
-  }
-  
-  #group-dashboard{
-    box-shadow: .2rem -.1rem 1.1rem -.2rem rgba(0,0,0,0.75);
-    animation-name: moveInLeft;
-    animation-duration: 1.5s;
-  }
+  /* box-shadow: .2rem -.1rem 1.1rem -.2rem rgba(0,0,0,0.75); */
+  animation-name: moveInRight;
+  animation-duration: 1.5s;
+}
 
-  .input-group-prepend {
-    span {
-        width: 5rem;
-        background-color: rgb(7, 91, 124);
-        color: black;
-        border:0 !important;
-    }
+#group-dashboard {
+  box-shadow: 0.2rem -0.1rem 1.1rem -0.2rem rgba(0, 0, 0, 0.75);
+  animation-name: moveInLeft;
+  animation-duration: 1.5s;
+}
+
+.input-group-prepend {
+  span {
+    width: 5rem;
+    background-color: rgb(7, 91, 124);
+    color: black;
+    border: 0 !important;
   }
+}
